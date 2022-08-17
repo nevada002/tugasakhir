@@ -21,7 +21,7 @@
                             Keluhan
                         </a>
                         <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item text-light" href="formnotakapal.php">Form Keluhan Nota
+                            <li><a class="dropdown-item text-light" href="formnotakapal.php">Keluhan Berita Acara Nota
                                     Kapal</a></li>
                             <li><a class="dropdown-item text-light" href="formnotasampah.php">Form Keluhan Nota
                                     Sampah Kapal</a></li>
@@ -34,7 +34,7 @@
                         <a class="nav-link" href="hasil.php">Hasil</a>
                     </li>
                     <div class="col-5"> </div>
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Selamat Datang
@@ -43,7 +43,16 @@
                             <li><a class="dropdown-item text-light" href="edit.php">Edit Profil</a></li>
                             <li><a class="dropdown-item text-light" href="index.php">Logout</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Masuk</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">|</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="regist.php">Daftar</a>
+                      </li>
                 </ul>
             </div>
         </div>
