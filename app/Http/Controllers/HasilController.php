@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class NotaSampahController extends Controller
+class HasilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class NotaSampahController extends Controller
      */
     public function index()
     {
-        return view('pages.user.form.notasampah.index');
+        return view('pages.user.hasil.index');
     }
 
     /**

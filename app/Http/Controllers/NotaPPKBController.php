@@ -13,7 +13,7 @@ class NotaPPKBController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.user.form.ppkb.index');
     }
 
     /**
