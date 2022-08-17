@@ -1,10 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\LoginController;
+
+
 use App\Http\Controllers\NotaKapalController;
 use App\Http\Controllers\NotaPPKBController;
 use App\Http\Controllers\NotaSampahController;
 use App\Http\Controllers\HasilController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +25,10 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
+
+Route::get('/login', [LoginController::class, 'index']);
 Route::get('formnotakapal', [NotaKapalController::class, 'index']);
 Route::get('formnotasampah', [NotaSampahController::class, 'index']);
 Route::get('formnotappkb', [NotaPPKBController::class, 'index']);
 Route::get('hasil', [HasilController::class, 'index']);
+

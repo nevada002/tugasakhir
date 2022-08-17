@@ -45,9 +45,11 @@
                         </ul>
                     </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Masuk</a>
-                    </li>
-                    <li class="nav-item">
+
+                        <a class="nav-link" href="/login">Masuk</a>
+                      </li>
+                      <li class="nav-item">
+
                         <a class="nav-link" href="#">|</a>
                     </li>
                     <li class="nav-item">
