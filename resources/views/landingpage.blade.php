@@ -1,3 +1,3 @@
-@extends('layout.mainlayout')
+@extends('layout.fixedfootermainlayout')
 @section('content')
 @endsection
