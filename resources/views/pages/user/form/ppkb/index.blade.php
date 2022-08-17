@@ -16,12 +16,7 @@
             :
         </div>
         <div class="col-sm-9">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Pilih Negara Anda</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+            <input type="text" class="form-control" id="negara">
         </div>
     </div>
     <div class="mb-3 row">

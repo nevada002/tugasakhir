@@ -3,7 +3,7 @@
     <nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light">
         <div class="container ">
             <a class="navbar-brand" href="/">
-                <img src="assets/img/pelindo.png" alt="" width="250" height="54.72">
+                <img src="assets/img/pelindo.svg" alt="" width="250" height="54.72">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
