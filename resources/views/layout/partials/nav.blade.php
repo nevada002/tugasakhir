@@ -1,9 +1,9 @@
 <div class="container">
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background: #F7AD1A">
+    <nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light">
         <div class="container ">
-            <a class="navbar-brand" href="homeuser.php">
-                <img src="assets/img/logopelindo.png" alt="" width="108.8" height="50">
+            <a class="navbar-brand" href="/">
+                <img src="assets/img/pelindo.png" alt="" width="250" height="54.72">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Keluhan
                         </a>
-                        <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background: #0475BD;">
                             <li><a class="dropdown-item text-light" href="/formnotakapal">Form Keluhan Berita Acara Nota
                                     Kapal</a></li>
                             <li><a class="dropdown-item text-light" href="/formnotasampah">Form Keluhan Nota
@@ -47,8 +47,8 @@
                     <li class="nav-item">
 
                         <a class="nav-link" href="/login">Masuk</a>
-                      </li>
-                      <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
 
                         <a class="nav-link" href="#">|</a>
                     </li>

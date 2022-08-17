@@ -1,4 +1,4 @@
-<footer class="text-center text-lg-start text-light" style="background: #3A4F6E;">
+<footer class="text-center text-lg-start text-light " style="background: #0475BD;">
     <!-- Section: Links  -->
     <section class="">
         <div class="container text-center text-md-start mt-0">
