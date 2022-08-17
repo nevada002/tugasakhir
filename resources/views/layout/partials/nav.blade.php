@@ -12,7 +12,7 @@
             <div class="col-7 justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="homeuser.php">Beranda</a>
+                        <a class="nav-link active" aria-current="page" href="/">Beranda</a>
                     </li>
                     <li class="nav-item">
                     <li class="nav-item dropdown">
@@ -21,17 +21,17 @@
                             Keluhan
                         </a>
                         <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item text-light" href="formnotakapal.php">Keluhan Berita Acara Nota
+                            <li><a class="dropdown-item text-light" href="/formnotakapal">Form Keluhan Berita Acara Nota
                                     Kapal</a></li>
-                            <li><a class="dropdown-item text-light" href="formnotasampah.php">Form Keluhan Nota
+                            <li><a class="dropdown-item text-light" href="/formnotasampah">Form Keluhan Nota
                                     Sampah Kapal</a></li>
-                            <li><a class="dropdown-item text-light" href="formppkb.php">Form Keluhan Penghapusan
+                            <li><a class="dropdown-item text-light" href="/formnotappkb">Form Keluhan Penghapusan
                                     PPKB</a></li>
                         </ul>
                     </li>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="hasil.php">Hasil</a>
+                        <a class="nav-link" href="/hasil">Hasil</a>
                     </li>
                     <div class="col-5"> </div>
                     {{-- <li class="nav-item dropdown">
@@ -46,13 +46,13 @@
                     </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="login.php">Masuk</a>
-                      </li>
-                      <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">|</a>
-                      </li>
-                      <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="regist.php">Daftar</a>
-                      </li>
+                    </li>
                 </ul>
             </div>
         </div>
