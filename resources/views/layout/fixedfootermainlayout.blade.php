@@ -6,11 +6,17 @@
 </head>
 
 <body>
-    @include('layout.partials.nav')
-    <div class="container my-5 py-5">
-        @yield('content')
+    <div class="grid">
+        <section class="navbar">
+            @include('layout.partials.nav')
+        </section>
+        <section class="main">
+            @yield('content')
+        </section>
+        <section class="footer">
+            @include('layout.partials.fixedfooter')
+        </section>
     </div>
-    @include('layout.partials.fixedfooter')
 </body>
 
 </html>

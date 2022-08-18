@@ -1,3 +1,27 @@
+/* Grid */
+.navbar {
+    grid-area: header;
+    height: 80.72px;
+}
+.main {
+    grid-area: main;
+    height: 100%;
+}
+.footer {
+    grid-area: footer;
+}
+
+.grid {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main "
+        "footer ";
+}
+
+.grid > section {
+    font-size: medium;
+}
 /* CSS Sign-in */
 .form-signin {
     max-width: 330px;
@@ -27,4 +51,3 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-
