@@ -6,14 +6,14 @@
 </head>
 
 <body>
-    <div class="grid">
-        <section class="navbar">
+    <div class="grid-user">
+        <section class="navbar-user">
             @include('layout.partials.nav')
         </section>
-        <section class="main">
+        <section class="main-user">
             @yield('content')
         </section>
-        <section class="footer">
+        <section class="footer-user">
             @include('layout.partials.footer')
         </section>
     </div>
