@@ -1,4 +1,4 @@
-@extends('layout.mainlayout')
+@extends('layout.fixedfootermainlayout')
 @section('content')
 <section class="h-100">
   <div class="container h-100">

@@ -1,4 +1,4 @@
-@extends('layout.mainlayout')
+@extends('layout.fixedfootermainlayout')
 @section('content')
 <!-- Memilih Role -->
 <div class="container">
