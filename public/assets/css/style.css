@@ -29,15 +29,21 @@
     grid-area: logo;
     height: 111px;
     width: 250px;
+    background-color: #97e3f8;
 }
 .navbar-admin {
     height: 111px;
     grid-area: nav;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #0475bd;
 }
 .sidebar-admin {
     grid-area: side;
     height: 763px;
     width: 250px;
+    background-color: #caf4fb;
 }
 .body-main {
     grid-area: body;

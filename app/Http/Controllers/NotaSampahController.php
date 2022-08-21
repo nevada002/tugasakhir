@@ -16,6 +16,16 @@ class NotaSampahController extends Controller
         return view('pages.user.form.notasampah.index');
     }
 
+    public function index2()
+    {
+        return view('pages.admin.beritaacara.beritaacaranotasampah.keluhan.index');
+    }
+
+    public function index3()
+    {
+        return view('pages.admin.beritaacara.beritaacaranotasampah.surat.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +33,7 @@ class NotaSampahController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.beritaacara.beritaacaranotasampah.surat.create');
     }
 
     /**

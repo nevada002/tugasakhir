@@ -1,7 +1,12 @@
 @extends('layout.adminlayout')
+@section('header')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page" style="color: white">Dashboard</li>
+    </ol>
+@endsection
 @section('content')
     {{-- Make Chart with 3 line --}}
-    {{-- <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -32,5 +37,5 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection

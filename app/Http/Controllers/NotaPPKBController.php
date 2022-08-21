@@ -16,6 +16,16 @@ class NotaPPKBController extends Controller
         return view('pages.user.form.ppkb.index');
     }
 
+    public function index2()
+    {
+        return view('pages.admin.beritaacara.beritaacarappkb.keluhan.index');
+    }
+    
+    public function index3()
+    {
+        return view('pages.admin.beritaacara.beritaacarappkb.surat.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +33,7 @@ class NotaPPKBController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.beritaacara.beritaacarappkb.surat.create');
     }
 
     /**

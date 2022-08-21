@@ -7,17 +7,19 @@
 
 <body>
     <div class="grid-admin">
-        <section class="logo-admin d-flex justify-content-center align-items-center" style="background-color: #CAF4FB">
+        <section class="logo-admin d-flex align-items-center">
             @include('layout.partials.logo')
         </section>
-        <section class="navbar-admin d-flex justify-content-start align-items-center" style="background-color: #0475BD;">
+        <section class="navbar-admin">
             @include('layout.partials.header')
         </section>
-        <section class="sidebar-admin " style="background-color: #CAF4FB">
+        <section class="sidebar-admin ">
             @include('layout.partials.side')
         </section>
         <section class="body-admin">
-            @yield('content')
+            <div class="container my-5">
+                @yield('content')
+            </div>
         </section>
     </div>
 </body>

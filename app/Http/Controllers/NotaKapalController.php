@@ -16,6 +16,16 @@ class NotaKapalController extends Controller
         return view('pages.user.form.notakapal.index');
     }
 
+    public function index2()
+    {
+        return view('pages.admin.beritaacara.beritaacaranotakapal.keluhan.index');
+    }
+
+    public function index3()
+    {
+        return view('pages.admin.beritaacara.beritaacaranotakapal.surat.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -24,6 +34,7 @@ class NotaKapalController extends Controller
     public function create()
     {
         //
+        return view('pages.admin.beritaacara.beritaacarappkb.surat.create');
     }
 
     /**
