@@ -1,6 +1,6 @@
 @extends('layout.fixedfootermainlayout')
 @section('content')
-    <div class="container h-100 mb-5">
+    <div class="h-100 mb-5">
         <div class="row justify-content-sm-center h-100">
             <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
                 <div class="card border-0 mt-5">

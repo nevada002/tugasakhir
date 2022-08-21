@@ -1,6 +1,6 @@
 @extends('layout.fixedfootermainlayout')
 @section('content')
-    <div class="containe h-100 mb-5">
+    <div class="h-100 mb-5">
         <div class="card border-0 mt-5">
             <div class="card-body">
                 <h1 class="card-title text-center mt-5">Daftar</h1>

@@ -11,7 +11,9 @@
             @include('layout.partials.nav')
         </section>
         <section class="main">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </section>
         <section class="footer">
             @include('layout.partials.fixedfooter')
