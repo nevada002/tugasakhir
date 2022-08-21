@@ -8,6 +8,6 @@ class RegistController extends Controller
 {
     public function index()
     {
-     return view('regist.index');
+     return view('regist.create');
     }
 }
