@@ -6,7 +6,7 @@
 @endsection
 @section('content')
     <table class="table table-striped">
-        <thead>
+        <thead class="thead">
             <tr>
                 <th scope="col">Nama Kapal</th>
                 <th scope="col">Tanggal</th>

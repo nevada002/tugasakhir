@@ -28,7 +28,7 @@
 .logo-admin {
     grid-area: logo;
     height: 111px;
-    width: 250px;
+    width: 15vw;
     background-color: #97e3f8;
 }
 .navbar-admin {
@@ -38,23 +38,35 @@
     justify-content: start;
     align-items: center;
     background-color: #0475bd;
+    width: 85vw;
 }
 .sidebar-admin {
     grid-area: side;
     height: 763px;
-    width: 250px;
+    width: 15vw;
+    /* width: 250px; */
     background-color: #caf4fb;
 }
 .body-main {
     grid-area: body;
     height: 763px;
+    width: 100%;
+}
+
+.footer-admin{
+    grid-area: foot;
+    height: 111px;
+    width: 100%;
+    background-color: #0475bd;
 }
 
 .grid-admin {
     display: grid;
     grid-template-areas:
         "logo nav"
-        "side body";
+        "side body"
+        "side foot"
+        ;
 }
 
 .grid-admin > section {
@@ -89,4 +101,7 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
+}
+.thead {
+    background-color: #f8f9fa;
 }
