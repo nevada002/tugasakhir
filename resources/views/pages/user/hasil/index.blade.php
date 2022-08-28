@@ -11,69 +11,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>12345</td>
-                <td>BA NOTA KAPAL</td>
-                <td>Diproses</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>21345</td>
-                <td>BA NOTA SAMPAH KAPAL</td>
-                <td>Ditolak</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>32145</td>
-                <td>BA PENGHAPUSAN PPKB</td>
-                <td>Berhasil</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>12345</td>
-                <td>BA NOTA KAPAL</td>
-                <td>Diproses</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>21345</td>
-                <td>BA NOTA SAMPAH KAPAL</td>
-                <td>Ditolak</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>32145</td>
-                <td>BA PENGHAPUSAN PPKB</td>
-                <td>Berhasil</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>12345</td>
-                <td>BA NOTA KAPAL</td>
-                <td>Diproses</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>21345</td>
-                <td>BA NOTA SAMPAH KAPAL</td>
-                <td>Ditolak</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>32145</td>
-                <td>BA PENGHAPUSAN PPKB</td>
-                <td>Berhasil</td>
-                <td></td>
-            </tr>
+            @forelse ($datas as $data)
+                <tr>
+                    <th scope="row">1</th>
+                    <td>12345</td>
+                    <td>BA NOTA KAPAL</td>
+                    <td>Diproses</td>
+                    <td></td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center">Tidak ada data</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 @endsection

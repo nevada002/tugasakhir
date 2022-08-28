@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hasil;
+use App\Models\NotaKapal;
 use Illuminate\Http\Request;
 
 class HasilController extends Controller
@@ -13,7 +15,9 @@ class HasilController extends Controller
      */
     public function index()
     {
-        return view('pages.user.hasil.index');
+        // datas = hasil with nota kapal, nota ppkb, nota sampah
+        $datas = Hasil::with('nota_kapal', 'nota_ppkb', 'nota_sampah')->get();
+        return view('pages.user.hasil.index', compact('datas'));
     }
 
     /**

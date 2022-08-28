@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotaSampah;
 use Illuminate\Http\Request;
 
 class NotaSampahController extends Controller
@@ -13,15 +14,10 @@ class NotaSampahController extends Controller
      */
     public function index()
     {
-        return view('pages.user.form.notasampah.index');
-    }
-
-    public function index2()
-    {
         return view('pages.admin.beritaacara.beritaacaranotasampah.keluhan.index');
     }
 
-    public function index3()
+    public function index2()
     {
         return view('pages.admin.beritaacara.beritaacaranotasampah.surat.index');
     }
@@ -31,7 +27,14 @@ class NotaSampahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
+    {
+        return view('pages.user.form.notasampah.index',[
+        ]);
+    }
+
+    public function create2()
     {
         return view('pages.admin.beritaacara.beritaacaranotasampah.surat.create');
     }
@@ -44,7 +47,17 @@ class NotaSampahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'namakapal' => 'required',
+            'tanggal' => 'required',
+            'nomornota' => 'required',
+            'deskripsi' => 'required',
+            'lampiranpendukung' => 'required',
+        ]);
+
+        $data = $request->except('_token');
+        NotaSampah::create($data);
+        return redirect()->route('formnotasampah.index')->with('success','Data berhasil ditambahkan');
     }
 
     /**

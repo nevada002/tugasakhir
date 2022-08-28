@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotaPPKB;
 use Illuminate\Http\Request;
 
 class NotaPPKBController extends Controller
@@ -13,15 +14,10 @@ class NotaPPKBController extends Controller
      */
     public function index()
     {
-        return view('pages.user.form.ppkb.index');
+        return view('pages.admin.beritaacara.beritaacarappkb.keluhan.index');
     }
 
     public function index2()
-    {
-        return view('pages.admin.beritaacara.beritaacarappkb.keluhan.index');
-    }
-    
-    public function index3()
     {
         return view('pages.admin.beritaacara.beritaacarappkb.surat.index');
     }
@@ -32,6 +28,10 @@ class NotaPPKBController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+    {
+        return view('pages.user.form.ppkb.index');
+    }
+    public function create2()
     {
         return view('pages.admin.beritaacara.beritaacarappkb.surat.create');
     }
@@ -44,7 +44,18 @@ class NotaPPKBController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'namakapal' => 'required',
+            'negara' => 'required',
+            'noppkb' => 'required',
+            'service' => 'required',
+            'agen' => 'required',
+            'alasan' => 'required',
+        ]);
+
+        $data = $request->except('_token');
+        NotaPPKB::create($data);
+        return redirect()->route('formppkb.index')->with('success','Data berhasil ditambahkan');
     }
 
     /**
