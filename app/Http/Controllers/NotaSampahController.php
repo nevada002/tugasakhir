@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeritaAcaraNotaSampah;
 use App\Models\NotaSampah;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,14 @@ class NotaSampahController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.beritaacara.beritaacaranotasampah.keluhan.index');
+        $notaSampahs = NotaSampah::orderBy('id', 'asc')->get();
+        return view('pages.admin.beritaacara.beritaacaranotasampah.keluhan.index', compact('notaSampahs'));
     }
 
     public function index2()
     {
-        return view('pages.admin.beritaacara.beritaacaranotasampah.surat.index');
+        $notaSampahs = BeritaAcaraNotaSampah::orderBy('id', 'asc')->get();
+        return view('pages.admin.beritaacara.beritaacaranotasampah.surat.index', compact('notaSampahs'));
     }
 
     /**
@@ -30,8 +33,7 @@ class NotaSampahController extends Controller
 
     public function create()
     {
-        return view('pages.user.form.notasampah.index',[
-        ]);
+        return view('pages.user.form.notasampah.index', []);
     }
 
     public function create2()
@@ -57,7 +59,22 @@ class NotaSampahController extends Controller
 
         $data = $request->except('_token');
         NotaSampah::create($data);
-        return redirect()->route('formnotasampah.index')->with('success','Data berhasil ditambahkan');
+        return redirect('formnotasampah')->with('success', 'Data berhasil ditambahkan');
+    }
+
+    public function store2(Request $request)
+    {
+        $request->validate([
+            'nomor_surat' => 'required',
+            'tanggal' => 'required',
+            'tanggalnotasampahkapal' => 'required',
+            'dibuatoleh' => 'required',
+            'lampiranpendukung' => 'required',
+        ]);
+
+        $data = $request->except('_token');
+        BeritaAcaraNotaSampah::create($data);
+        return redirect('/suratnotasampahkapal')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

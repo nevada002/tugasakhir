@@ -68,7 +68,7 @@
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
             Copyright ©
-            <a class="text-reset fw-bold" href="#">IPC Pelindo 2021</a>
+            <a class="text-reset fw-bold" href="https://pelindo.co.id/">Pelindo 2021</a>
         </div>
         <!-- Copyright -->
     </footer>

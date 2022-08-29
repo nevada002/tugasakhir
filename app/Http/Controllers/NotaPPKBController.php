@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeritaAcaraNotaPPKB;
 use App\Models\NotaPPKB;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,14 @@ class NotaPPKBController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.beritaacara.beritaacarappkb.keluhan.index');
+        $notaPPKBs = NotaPPKB::orderBy('id', 'asc')->get();
+        return view('pages.admin.beritaacara.beritaacarappkb.keluhan.index', compact('notaPPKBs'));
     }
 
     public function index2()
     {
-        return view('pages.admin.beritaacara.beritaacarappkb.surat.index');
+        $notaPPKBs = BeritaAcaraNotaPPKB::orderBy('id', 'asc')->get();
+        return view('pages.admin.beritaacara.beritaacarappkb.surat.index', compact('notaPPKBs'));
     }
 
     /**
@@ -55,7 +58,30 @@ class NotaPPKBController extends Controller
 
         $data = $request->except('_token');
         NotaPPKB::create($data);
-        return redirect()->route('formppkb.index')->with('success','Data berhasil ditambahkan');
+        return redirect('formnotappkb')->with('success','Data berhasil ditambahkan');
+    }
+
+    public function store2(Request $request)
+    {
+        $request->validate([
+            'nomor_surat' => 'required',
+            'tanggal' => 'required',
+            'nama_perusahaan' => 'required',
+            'nama_kapal' => 'required',
+            'noppkb' => 'required',
+            'service_code' => 'required',
+            'noukk' => 'required',
+            'agen' => 'required',
+            'lokasi' => 'required',
+            'tujuan' => 'required',
+            'dibuatoleh' => 'required',
+            'alasan' => 'required',
+            'lampiranpendukung' => 'required',
+        ]);
+
+        $data = $request->except('_token');
+        BeritaAcaraNotaPPKB::create($data);
+        return redirect('/suratpenghapusanppkb')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class NotaPPKB extends Model
 {
     use HasFactory;
-    protected $table = 'nota_ppkb';
+    protected $table = 'nota_ppkbs';
     protected $guarded = [];
     
     public function getDataNoPPKB()

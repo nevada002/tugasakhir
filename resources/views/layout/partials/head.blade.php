@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IPC Pelindo </title>
+<title>Pelindo </title>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="assets/img/logoatas.svg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -12,3 +12,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
     integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous">
 </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{{-- <script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable({{ Js::from($result) }});
+
+        var options = {
+            chart: {
+                title: 'Website Performance',
+                subtitle: 'Click and Views',
+            },
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script> --}}

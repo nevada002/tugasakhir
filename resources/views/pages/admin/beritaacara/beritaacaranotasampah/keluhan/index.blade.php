@@ -10,75 +10,30 @@
             <tr>
                 <th scope="col">Nama Kapal</th>
                 <th scope="col">Tanggal</th>
+                <th scope="col">Nomor Nota</th>
                 <th scope="col">Deskripsi Keluhan</th>
                 <th scope="col">Lampiran Pendukung</th>
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
-        {{-- <tbody>
+        <tbody>
+            @forelse ($notaSampahs as $datas)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>12345</td>
-                    <td>BA NOTA KAPAL</td>
-                    <td>Diproses</td>
-                    <td></td>
+                    <th scope="row">{{ $datas->namakapal }}</th>
+                    <td>{{ $datas->tanggal }}</td>
+                    <td>{{ $datas->nomornota }}</td>
+                    <td>{{ $datas->deskripsi }}</td>
+                    <td>{{ $datas->lampiranpendukung }}</td>
+                    <td>
+                        <a href="/keluhannotasampahkapal/{{ $datas->id }}/edit" class="btn btn-primary">Edit</a>
+                        <form action="/keluhannotasampahkapal/{{ $datas->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>21345</td>
-                    <td>BA NOTA SAMPAH KAPAL</td>
-                    <td>Ditolak</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>32145</td>
-                    <td>BA PENGHAPUSAN PPKB</td>
-                    <td>Berhasil</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>12345</td>
-                    <td>BA NOTA KAPAL</td>
-                    <td>Diproses</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>21345</td>
-                    <td>BA NOTA SAMPAH KAPAL</td>
-                    <td>Ditolak</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>32145</td>
-                    <td>BA PENGHAPUSAN PPKB</td>
-                    <td>Berhasil</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>12345</td>
-                    <td>BA NOTA KAPAL</td>
-                    <td>Diproses</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>21345</td>
-                    <td>BA NOTA SAMPAH KAPAL</td>
-                    <td>Ditolak</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>32145</td>
-                    <td>BA PENGHAPUSAN PPKB</td>
-                    <td>Berhasil</td>
-                    <td></td>
-                </tr>
-            </tbody> --}}
+            @empty
+            @endforelse
     </table>
 @endsection

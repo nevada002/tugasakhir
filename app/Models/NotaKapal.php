@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class NotaKapal extends Model
 {
     use HasFactory;
-    protected $table = 'nota_kapal';
+    protected $table = 'nota_kapals';
     protected $guarded = [];
     
     public function getDataNoKa()

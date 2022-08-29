@@ -21,7 +21,7 @@
                             Keluhan
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background: #0475BD;">
-                            <li><a class="dropdown-item text-light" href="/formnotakapal">Form Keluhan Berita Acara Nota
+                            <li><a class="dropdown-item text-light" href="/formnotakapal">Form Keluhan Nota
                                     Kapal</a></li>
                             <li><a class="dropdown-item text-light" href="/formnotasampah">Form Keluhan Nota
                                     Sampah Kapal</a></li>

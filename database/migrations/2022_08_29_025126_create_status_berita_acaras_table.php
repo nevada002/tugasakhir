@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('status_berita_acaras', function (Blueprint $table) {
             $table->id();
-            $table->name();
+            // $table->name();
         });
     }
 
