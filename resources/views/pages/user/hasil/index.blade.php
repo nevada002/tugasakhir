@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($datas as $data)
+            {{-- @forelse ($datas as $data) --}}
                 <tr>
                     <th scope="row">1</th>
                     <td>12345</td>
@@ -19,11 +19,11 @@
                     <td>Diproses</td>
                     <td></td>
                 </tr>
-            @empty
-                <tr>
+            {{-- @empty --}}
+                {{-- <tr>
                     <td colspan="5" class="text-center">Tidak ada data</td>
-                </tr>
-            @endforelse
+                </tr> --}}
+            {{-- @endforelse --}}
         </tbody>
     </table>
 @endsection

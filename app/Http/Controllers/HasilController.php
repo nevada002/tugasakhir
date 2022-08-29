@@ -15,9 +15,8 @@ class HasilController extends Controller
      */
     public function index()
     {
-        // datas = hasil with nota kapal, nota ppkb, nota sampah
-        $datas = Hasil::with('nota_kapal', 'nota_ppkb', 'nota_sampah')->get();
-        return view('pages.user.hasil.index', compact('datas'));
+        return view('pages.user.hasil.index');
+        
     }
 
     /**

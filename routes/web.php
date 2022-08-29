@@ -37,13 +37,13 @@ Route::get('regist', [RegistController::class, 'index']);
 
 //User
 Route::get('formnotakapal', [NotaKapalController::class, 'create']);
-Route::post('formnotakapal/store', [NotaKapalController::class, 'store']);
+Route::post('formnotakapal/store', [NotaKapalController::class, 'store'])->name("storeNotaKapal");
 
 Route::get('formnotasampah', [NotaSampahController::class, 'create']);
-Route::post('formnotasampah/store', [NotaSampahController::class, 'store']);
+Route::post('formnotasampah/store', [NotaSampahController::class, 'store'])->name("storeNotaSampah");
 
 Route::get('formnotappkb', [NotaPPKBController::class, 'create']);
-Route::post('formnotappkb/store', [NotaPPKBController::class, 'store']);
+Route::post('formnotappkb/store', [NotaPPKBController::class, 'store'])->name("storeNotaPPKB");
 
 Route::get('hasil', [HasilController::class, 'index']);
 
@@ -51,20 +51,20 @@ Route::get('hasil', [HasilController::class, 'index']);
 Route::get('dashboard', [DashboardController::class, 'index']);
 
 //Keluhan Nota Kapal
-Route::get('keluhannotakapal', [NotaKapalController::class, 'index2']);
-Route::get('suratnotakapal', [NotaKapalController::class, 'index3']);
+Route::get('keluhannotakapal', [NotaKapalController::class, 'index']);
+Route::get('suratnotakapal', [NotaKapalController::class, 'index2']);
 //Buat Nota Kapal
 Route::get('buatsuratnotakapal', [NotaKapalController::class, 'create2']);
 
 //Keluhan Nota Sampah
-Route::get('keluhannotasampahkapal', [NotaSampahController::class, 'index2']);
-Route::get('suratnotasampahkapal', [NotaSampahController::class, 'index3']);
+Route::get('keluhannotasampahkapal', [NotaSampahController::class, 'index']);
+Route::get('suratnotasampahkapal', [NotaSampahController::class, 'index2']);
 //Buat Nota Sampah 
 Route::get('buatsuratnotasampahkapal', [NotaKapalController::class, 'create2']);
 
 //Keluhan Penghapusan PPKB
-Route::get('keluhanpenghapusanppkb', [NotaPPKBController::class, 'index2']);
-Route::get('suratpenghapusanppkb', [NotaPPKBController::class, 'index3']);
+Route::get('keluhanpenghapusanppkb', [NotaPPKBController::class, 'index']);
+Route::get('suratpenghapusanppkb', [NotaPPKBController::class, 'index2']);
 //Buat Penghapusan PPKB
 Route::get('buatsuratpenghapusanppkb', [NotaKapalController::class, 'create2']);
 

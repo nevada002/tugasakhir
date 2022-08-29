@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nota_kapals', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nonotakapal')->nullable();
-            $table->string('namakapal');
-            $table->date('tanggal');
-            $table->text('deskripsi');
-            $table->text('lampiranpendukung');
-            $table->timestamps();
+        Schema::create('status_berita_acaras', function (Blueprint $table) {
+            $table->id();
+            $table->name();
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nota_kapals');
+        Schema::dropIfExists('status_berita_acaras');
     }
 };

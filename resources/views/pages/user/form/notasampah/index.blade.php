@@ -1,7 +1,7 @@
 @extends('layout.mainlayout')
 @section('content')
     <h1 class="d-flex justify-content-center align-items-center form-group mb-3">Form Keluhan Nota Sampah Kapal</h1>
-    <form action="{{ route('formnotasampah/store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('storeNotaSampah') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3 row">
             <label for="namakapal" class="col-sm-2 col-form-label"><strong>Nama Kapal</strong></label>
