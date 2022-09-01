@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('keluhannotakapal/store/{id}/{statusId}', [NotaKapalController::class, 'store3'])->name("statusNotaKapal");

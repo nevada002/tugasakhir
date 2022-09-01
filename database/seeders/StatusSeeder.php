@@ -15,6 +15,20 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::('')
+        DB::table('status_berita_acaras')->insert([
+            [
+                'id' => 1,
+                'name' => 'Proses'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Ditolak'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Berhasil'
+            ]
+        ]);
+        
     }
 }

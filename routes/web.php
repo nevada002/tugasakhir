@@ -13,8 +13,6 @@ use App\Http\Controllers\HasilController;
 
 // Admin
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -52,12 +50,16 @@ Route::get('dashboard', [DashboardController::class, 'index']);
 
 //Keluhan Nota Kapal
 Route::get('keluhannotakapal', [NotaKapalController::class, 'index']);
+
+//Download Nota Kapal
+Route::get('downloadnotakapal/{id}', [NotaKapalController::class, 'download'])->name('downloadnotakapal');
 Route::get('suratnotakapal', [NotaKapalController::class, 'index2']);
 //Buat Nota Kapal
 Route::get('buatsuratnotakapal', [NotaKapalController::class, 'create2']);
 Route::post('buatsuratnotakapal/store', [NotaKapalController::class, 'store2'])->name("storeBeritaAcaraNotaKapal");
-//Delete by Id Nota Kapal
-Route::get('keluhannotakapal/delete/{id}', [NotaKapalController::class, 'destroy'])->name("deleteNotaKapal/{id}");
+//Show Nota Kapal
+Route::get('suratnotakapal/{id}', [NotaKapalController::class, 'show'])->name("showSuratNotaKapal");
+Route::get('edit/suratberitaacaranotakapal/{id}', [NotaKapalController::class, 'show2'])->name("editSuratBeritaAcaraNotaKapal");
 
 //Keluhan Nota Sampah
 Route::get('keluhannotasampahkapal', [NotaSampahController::class, 'index']);

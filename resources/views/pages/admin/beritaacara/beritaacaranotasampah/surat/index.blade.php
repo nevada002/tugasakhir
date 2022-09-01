@@ -1,4 +1,5 @@
 @extends('layout.adminlayout')
+@section('title', 'Surat Berita Acara Nota Sampah Kapal')
 @section('header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="color: white">Surat Berita Acara Nota Sampah Kapal</li>
@@ -11,13 +12,13 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nomor Surat</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Tanggal Nota Sampah Kapal</th>
-                <th scope="col">Di Buat Oleh</th>
-                <th scope="col">Lampiran Pendukung</th>
-                <th scope="col">Aksi</th>
+                <th scope="row">No</th>
+                <th>Nomor Surat</th>
+                <th>Tanggal</th>
+                <th>Tanggal Nota Sampah Kapal</th>
+                <th>Di Buat Oleh</th>
+                <th>Lampiran Pendukung</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -38,14 +39,10 @@
                         @endif
                     </td>
                     <td class="d-flex justify-content-space-between">
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-primary"><i
-                                class="bi bi-eye"></i></a>
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-success ms-1"><i
-                                class="bi bi-pencil-square"></i></a>
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-secondary ms-1"><i
-                                class="bi bi-check-circle"></i></a>
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-info ms-1"><i
-                                class="bi bi-list-check"></i></a>
+                        <a href="#" class="btn btn-primary"><i class="bi bi-eye"></i></a>
+                        <a href="#" class="btn btn-success ms-1"><i class="bi bi-pencil-square"></i></a>
+                        <a href="#" class="btn btn-secondary ms-1"><i class="bi bi-check-circle"></i></a>
+                        <a href="#" class="btn btn-info ms-1"><i class="bi bi-list-check"></i></a>
                     </td>
                 </tr>
             @empty

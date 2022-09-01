@@ -1,4 +1,5 @@
 @extends('layout.adminlayout')
+@section('title', 'Buat Surat Berita Acara Nota Sampah Kapal')
 @section('header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="color: #fff">Buat Surat Berita Acara Nota Sampah Kapal

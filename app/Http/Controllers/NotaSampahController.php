@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BeritaAcaraNotaSampah;
 use App\Models\NotaSampah;
+use App\Models\StatusBeritaAcara;
 use Illuminate\Http\Request;
 
 class NotaSampahController extends Controller
@@ -15,8 +16,9 @@ class NotaSampahController extends Controller
      */
     public function index()
     {
+        $status = StatusBeritaAcara::all();
         $notaSampahs = NotaSampah::orderBy('id', 'asc')->get();
-        return view('pages.admin.beritaacara.beritaacaranotasampah.keluhan.index', compact('notaSampahs'));
+        return view('pages.admin.beritaacara.beritaacaranotasampah.keluhan.index', compact('notaSampahs', 'status'));
     }
 
     public function index2()
@@ -60,15 +62,14 @@ class NotaSampahController extends Controller
         $file = $request->file('lampiranpendukung');
         $fileName = $file->getClientOriginalName();
         $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
-        $filePath = 'filelampiranpendukung/' . $fileName;
 
-        $notaSampahs = new NotaSampah();
-        $notaSampahs->namakapal = $request->namakapal;
-        $notaSampahs->tanggal = $request->tanggal;
-        $notaSampahs->nomornota = $request->nomornota;
-        $notaSampahs->deskripsi = $request->deskripsi;
-        $notaSampahs->lampiranpendukung = $filePath;
-        $notaSampahs->save();
+        NotaSampah::create([
+            'namakapal' => $request->namakapal,
+            'tanggal' => $request->tanggal,
+            'nomornota' => $request->nomornota,
+            'deskripsi' => $request->deskripsi,
+            'lampiranpendukung' => $fileName,
+        ]);
         return redirect('formnotasampah')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -85,15 +86,14 @@ class NotaSampahController extends Controller
         $file = $request->file('lampiranpendukung');
         $fileName = $file->getClientOriginalName();
         $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
-        $filePath = 'filelampiranpendukung/' . $fileName;
 
-        $notaSampahs = new BeritaAcaraNotaSampah();
-        $notaSampahs->nomor_surat = $request->nomor_surat;
-        $notaSampahs->tanggal = $request->tanggal;
-        $notaSampahs->tanggalnotasampahkapal = $request->tanggalnotasampahkapal;
-        $notaSampahs->dibuatoleh = $request->dibuatoleh;
-        $notaSampahs->lampiranpendukung = $filePath;
-        $notaSampahs->save();
+        BeritaAcaraNotaSampah::create([
+            'nomor_surat' => $request->nomor_surat,
+            'tanggal' => $request->tanggal,
+            'tanggalnotasampahkapal' => $request->tanggalnotasampahkapal,
+            'dibuatoleh' => $request->dibuatoleh,
+            'lampiranpendukung' => $fileName,
+        ]);
         return redirect('/suratnotasampahkapal')->with('success', 'Data berhasil ditambahkan');
     }
 

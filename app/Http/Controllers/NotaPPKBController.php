@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BeritaAcaraNotaPPKB;
 use App\Models\NotaPPKB;
+use App\Models\StatusBeritaAcara;
 use Illuminate\Http\Request;
 
 class NotaPPKBController extends Controller
@@ -15,8 +16,9 @@ class NotaPPKBController extends Controller
      */
     public function index()
     {
+        $status = StatusBeritaAcara::all();
         $notaPPKBs = NotaPPKB::orderBy('id', 'asc')->get();
-        return view('pages.admin.beritaacara.beritaacarappkb.keluhan.index', compact('notaPPKBs'));
+        return view('pages.admin.beritaacara.beritaacarappkb.keluhan.index', compact('notaPPKBs', 'status'));
     }
 
     public function index2()
@@ -82,23 +84,22 @@ class NotaPPKBController extends Controller
         $file = $request->file('lampiranpendukung');
         $fileName = $file->getClientOriginalName();
         $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
-        $filePath = 'filelampiranpendukung/' . $fileName;
 
-        $notaPPKB = new BeritaAcaraNotaPPKB();
-        $notaPPKB->nomor_surat = $request->nomor_surat;
-        $notaPPKB->tanggal = $request->tanggal;
-        $notaPPKB->nama_perusahaan = $request->nama_perusahaan;
-        $notaPPKB->nama_kapal = $request->nama_kapal;
-        $notaPPKB->noppkb = $request->noppkb;
-        $notaPPKB->service_code = $request->service_code;
-        $notaPPKB->noukk = $request->noukk;
-        $notaPPKB->agen = $request->agen;
-        $notaPPKB->lokasi = $request->lokasi;
-        $notaPPKB->tujuan = $request->tujuan;
-        $notaPPKB->dibuatoleh = $request->dibuatoleh;
-        $notaPPKB->alasan = $request->alasan;
-        $notaPPKB->lampiranpendukung = $filePath;
-        $notaPPKB->save();
+        BeritaAcaraNotaPPKB::create([
+            'nomor_surat' => $request->nomor_surat,
+            'tanggal' => $request->tanggal,
+            'nama_perusahaan' => $request->nama_perusahaan,
+            'nama_kapal' => $request->nama_kapal,
+            'noppkb' => $request->noppkb,
+            'service_code' => $request->service_code,
+            'noukk' => $request->noukk,
+            'agen' => $request->agen,
+            'lokasi' => $request->lokasi,
+            'tujuan' => $request->tujuan,
+            'dibuatoleh' => $request->dibuatoleh,
+            'alasan' => $request->alasan,
+            'lampiranpendukung' => $fileName,
+        ]);
         return redirect('/suratpenghapusanppkb')->with('success', 'Data berhasil ditambahkan');
     }
 

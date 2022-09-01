@@ -1,4 +1,5 @@
 @extends('layout.mainlayout')
+@section('title', 'Hasil')
 @section('content')
     <table class="table table-striped">
         <thead>
@@ -11,19 +12,21 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @forelse ($datas as $data) --}}
+            @forelse ($hasils as $datas)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>12345</td>
-                    <td>BA NOTA KAPAL</td>
-                    <td>Diproses</td>
-                    <td></td>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $datas->nomor_berita_acara }}</td>
+                    <td>{{ $datas->jenis_berita_acara }}</td>
+                    <td>{{ $datas->status }}</td>
+                    <td class="d-flex justify-content-space-between">
+                        <a href="{{ route('beritaacaranotasampahkapal.show', $datas->id) }}" class="btn btn-primary"><i class="bi bi-eye"></i></a>
+                        <a href="{{ route('beritaacaranotasampahkapal.edit', $datas->id) }}" class="btn btn-success ms-1"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ route('beritaacaranotasampahkapal.destroy', $datas->id) }}" class="btn btn-secondary ms-1"><i class="bi bi-check-circle"></i></a>
+                        <a href="{{ route('beritaacaranotasampahkapal.show', $datas->id) }}" class="btn btn-info ms-1"><i class="bi bi-list-check"></i></a>
+                    </td>
                 </tr>
-            {{-- @empty --}}
-                {{-- <tr>
-                    <td colspan="5" class="text-center">Tidak ada data</td>
-                </tr> --}}
-            {{-- @endforelse --}}
+            @empty
+            @endforelse
         </tbody>
     </table>
 @endsection

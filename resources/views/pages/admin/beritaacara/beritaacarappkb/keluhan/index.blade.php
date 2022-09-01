@@ -1,4 +1,5 @@
 @extends('layout.adminlayout')
+@section('title', 'Keluhan Penghapusan PPKB')
 @section('header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="color: white">Keluhan Penghapusan PPKB</li>
@@ -30,9 +31,11 @@
                         <input class="text-center mb-1" disabled id="Proses" type="text"
                             style="text-decoration: transparent; border: none;">
                         <select class="form-select" onchange="onClickSelect(event)">
-                            <option class="text-center" value="Proses">Proses</option>
-                            <option class="text-center" value="Ditolak">Ditolak</option>
-                            <option class="text-center" value="Berhasil">Berhasil</option>
+                            @forelse ($status as $statuses)
+                                <option class="text-center" id="{{ $statuses->id }}">{{ $statuses->name }}</option>
+                            @empty
+                                -
+                            @endforelse
                         </select>
                     </td>
                 </tr>

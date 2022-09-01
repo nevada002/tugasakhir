@@ -1,4 +1,5 @@
 @extends('layout.adminlayout')
+@section('title', 'Keluhan Nota Kapal')
 @section('header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="color: white">Keluhan Nota Kapal</li>
@@ -32,11 +33,17 @@
                     </td>
                     <td class="justify-content-center" style="text-align: center">
                         <input class="text-center mb-1" disabled id="Proses" type="text"
-                            style="text-decoration: transparent; border: none;">
-                        <select class="form-select" onchange="onClickSelect(event)">
-                            <option class="text-center" value="Proses">Proses</option>
-                            <option class="text-center" value="Ditolak">Ditolak</option>
-                            <option class="text-center" value="Berhasil">Berhasil</option>
+                            style="text-decoration: transparent; border: none;" name="{{ $datas->id }}">
+                        <select class="form-select" name="status_id" onchange="onChangeSelect(event)"
+                            onclick="onClick(event)">
+                            @forelse ($status as $statuses)
+                                <a href="/keluhannotakapal/store/{{ $datas->id }}/{{ $statuses->id }}"></a>
+                                <option class="text-center" name="status_id" id="{{ $statuses->id }}" value="{{ $statuses->id }}">
+                                    {{ $statuses->name }}</option>
+                                </a>
+                            @empty
+                                -
+                            @endforelse
                         </select>
                     </td>
                 </tr>
@@ -45,7 +52,20 @@
     </table>
 @endsection
 <script>
-    function onClickSelect(e) {
+    function onChangeSelect(e) {
         document.getElementById("Proses").value = e.target.value
+    }
+
+    function onClick(e) {
+        var id = document.getElementById("Proses").name
+        var status_id = document.getElementById("Proses").value
+        var url = "/keluhannotakapal/store/" + id + "/" + status_id
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                console.log(response)
+            }
+        })
     }
 </script>

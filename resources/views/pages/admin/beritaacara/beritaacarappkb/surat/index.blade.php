@@ -1,4 +1,5 @@
 @extends('layout.adminlayout')
+@section('title', 'Surat Berita Acara Penghapusan PPKB')
 @section('header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="color: white">Surat Berita Acara Penghapusan PPKB</li>
@@ -11,21 +12,21 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nomor Surat</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Nama Perusahaan</th>
-                <th scope="col">Nama Kapal</th>
-                <th scope="col">No.PPKB / Ke</th>
-                <th scope="col">Service Code</th>
-                <th scope="col">No. UKK</th>
-                <th scope="col">Agen</th>
-                <th scope="col">Lokasi</th>
-                <th scope="col">Tujuan</th>
-                <th scope="col">Alasan Penghapusan</th>
-                <th scope="col">Di Buat Oleh</th>
-                <th scope="col">Lampiran Pendukung</th>
-                <th scope="col">Aksi</th>
+                <th scope="row">No</th>
+                <th>Nomor Surat</th>
+                <th>Tanggal</th>
+                <th>Nama Perusahaan</th>
+                <th>Nama Kapal</th>
+                <th>No.PPKB / Ke</th>
+                <th>Service Code</th>
+                <th>No. UKK</th>
+                <th>Agen</th>
+                <th>Lokasi</th>
+                <th>Tujuan</th>
+                <th>Alasan Penghapusan</th>
+                <th>Di Buat Oleh</th>
+                <th>Lampiran Pendukung</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -54,13 +55,13 @@
                         @endif
                     </td>
                     <td class="d-flex justify-content-space-between">
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-primary"><i
+                        <a href="#" class="btn btn-primary"><i
                                 class="bi bi-eye"></i></a>
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-success"><i
+                        <a href="#" class="btn btn-success ms-1"><i
                                 class="bi bi-pencil-square"></i></a>
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-secondary"><i
+                        <a href="#" class="btn btn-secondary ms-1"><i
                                 class="bi bi-check-circle"></i></a>
-                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-info"><i
+                        <a href="#" class="btn btn-info ms-1"><i
                                 class="bi bi-list-check"></i></a>
                     </td>
                 </tr>

@@ -1,6 +1,7 @@
 @extends('layout.mainlayout')
+@section('title', 'Penghapusan PPKB')
 @section('content')
-    <h1 class="d-flex justify-content-center align-items-center mb-3">Form Penghapusan PPKB</h1>
+    <h1 class="d-flex justify-content-center align-items-center mb-3">Form Keluhan Penghapusan PPKB</h1>
     <form action="{{ route('storeNotaPPKB') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3 row">

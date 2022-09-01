@@ -1,5 +1,4 @@
 @extends('layout.adminlayout')
-@section('title', 'Buat Surat Berita Acara Nota Kapal')
 @section('header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="color: #fff">Buat Surat Berita Acara Nota Kapal</li>
@@ -8,7 +7,7 @@
 @section('content')
     <button type="button" class="btn btn-danger mb-3"><a href="/suratnotakapal"
             style="color:#fff; text-decoration: none">Kembali</a></button>
-    <form action="/buatsuratnotakapal/store" method="POST" enctype="multipart/form-data">
+    <form action="{{ route ('storeBeritaAcaraNotaKapal') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3 row">
             <label class="col-sm-2 col-form-label" for="nomor_surat">Nomor Surat</label>
@@ -47,13 +46,8 @@
             <label class="col-sm-2 col-form-label" for="nomor_nota_kapal">Nomor
                 Nota Kapal</label>
             <div class="col-sm-4">
-                <select class="form-select" name="nota_kapal_id">
-                    <option name="">Pilih nota kapal</option>
-                    @foreach ($notaKapal as $datas)
-                        <option id="{{ $datas->id }}" value="{{ $datas->id }}" name="nota_kapal_id">
-                            {{ $datas->namakapal }}</option>
-                    @endforeach
-                </select>
+                <input type="text" class="form-control" id="nomor_nota_kapal" name="nomor_nota_kapal"
+                    placeholder="Nomor Nota Kapal">
             </div>
             <label class="col-sm-2 col-form-label" for="dibuatoleh">Di Buat Oleh</label>
             <div class="col-sm-4">

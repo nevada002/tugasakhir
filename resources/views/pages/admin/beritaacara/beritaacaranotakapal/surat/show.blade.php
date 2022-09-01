@@ -1,5 +1,4 @@
 @extends('layout.adminlayout')
-@section('title', 'Surat Berita Acara Nota Kapal')
 @section('header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="color: #fff">Surat Berita Acara Nota Kapal</li>
@@ -26,7 +25,7 @@
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        {{-- <tbody>
             @forelse ($notaKapals as $datas)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
@@ -49,16 +48,15 @@
                         @endif
                     </td>
                     <td class="d-flex justify-content-space-between">
-                        <a href="{{ route('showSuratNotaKapal', ['id' => $datas->id]) }}" class="btn btn-primary"><i
-                                class="bi bi-eye"></i></a>
-                        <a href="{{ route('editSuratBeritaAcaraNotaKapal', ['id' => $datas->id]) }}"
-                            class="btn btn-success ms-1"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ route('showBeritaAcaraNotaKapal', ['id' => $datas->id]) }}" target="_blank"
+                            class="btn btn-primary"><i class="bi bi-eye"></i></a>
+                        <a href="#" class="btn btn-success ms-1"><i class="bi bi-pencil-square"></i></a>
                         <a href="#" class="btn btn-secondary ms-1"><i class="bi bi-check-circle"></i></a>
                         <a href="#" class="btn btn-info ms-1"><i class="bi bi-list-check"></i></a>
                     </td>
                 </tr>
             @empty
             @endforelse
-        </tbody>
+        </tbody> --}}
     </table>
 @endsection

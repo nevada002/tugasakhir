@@ -1,4 +1,5 @@
 @extends('layout.mainlayout')
+@section('title', 'Keluhan Nota Sampah Kapal')
 @section('content')
     <h1 class="d-flex justify-content-center align-items-center form-group mb-3">Form Keluhan Nota Sampah Kapal</h1>
     <form action="{{ route('storeNotaSampah') }}" method="post" enctype="multipart/form-data">

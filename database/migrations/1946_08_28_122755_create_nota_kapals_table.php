@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nota_kapals', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nonotakapal')->nullable();
+            $table->id(); 
             $table->string('namakapal');
             $table->date('tanggal');
             $table->text('deskripsi');
             $table->text('lampiranpendukung');
+            $table->foreignId('status_id')->constrained('status_berita_acaras');
             $table->timestamps();
         });
     }

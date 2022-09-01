@@ -15,8 +15,8 @@ class HasilController extends Controller
      */
     public function index()
     {
-        return view('pages.user.hasil.index');
-        
+        $hasils = Hasil::orderBy('id', 'asc')->get();
+        return view('pages.user.hasil.index', compact('hasils'));
     }
 
     /**
