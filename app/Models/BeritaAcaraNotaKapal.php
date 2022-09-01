@@ -10,4 +10,14 @@ class BeritaAcaraNotaKapal extends Model
     use HasFactory;
     protected $table = 'berita_acara_nota_kapals';
     protected $guarded = [];
+
+    public  function getDataBaNoKa()
+    {
+        return $this::count();
+    }
+    
+    public static function getCountDataBaNoKa()
+    {
+        return self::count();
+    }
 }

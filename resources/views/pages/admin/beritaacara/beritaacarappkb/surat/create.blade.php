@@ -79,7 +79,7 @@
             <label class="col-sm-2 col-form-label" for="lampiranpendukung">Lampiran Pendukung</label>
             <div class="col-sm-10">
                 <input type="file" class="form-control" id="lampiranpendukung" name="lampiranpendukung"
-                    placeholder="Lampiran Pendukung">
+                    placeholder="Lampiran Pendukung" accept=".pdf">
             </div>
         </div>
         <div class="mb-3 row">

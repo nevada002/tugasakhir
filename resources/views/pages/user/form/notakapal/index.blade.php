@@ -44,7 +44,7 @@
             </div>
             <div class="col-sm-9">
                 <input class="form-control" name="lampiranpendukung" class="form-control-file" type="file"
-                    id="lampiranpendukung">
+                    id="lampiranpendukung" accept=".pdf">
             </div>
         </div>
 

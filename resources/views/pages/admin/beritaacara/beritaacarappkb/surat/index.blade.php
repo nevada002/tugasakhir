@@ -44,14 +44,24 @@
                     <td>{{ $datas->tujuan }}</td>
                     <td>{{ $datas->alasan }}</td>
                     <td>{{ $datas->dibuatoleh }}</td>
-                    <td>{{ $datas->lampiranpendukung }}</td>
                     <td>
-                        <a href="/suratpenghapusanppkb/{{ $datas->id }}/edit" class="btn btn-primary">Edit</a>
-                        <form action="/suratpenghapusanppkb/{{ $datas->id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
+                        @if ($datas->lampiranpendukung != null)
+                            <a class="btn btn-secondary" style="text-decoration: none"
+                                href="{{ asset('storage/public/filelampiranpendukung' . $datas->lampiranpendukung) }}"
+                                target="_blank">Download</a>
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td class="d-flex justify-content-space-between">
+                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-primary"><i
+                                class="bi bi-eye"></i></a>
+                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-success"><i
+                                class="bi bi-pencil-square"></i></a>
+                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-secondary"><i
+                                class="bi bi-check-circle"></i></a>
+                        <a href="/suratnotakapal/{{ $datas->id }}/edit" class="btn btn-info"><i
+                                class="bi bi-list-check"></i></a>
                     </td>
                 </tr>
             @empty

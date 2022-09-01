@@ -76,11 +76,29 @@ class NotaPPKBController extends Controller
             'tujuan' => 'required',
             'dibuatoleh' => 'required',
             'alasan' => 'required',
-            'lampiranpendukung' => 'required',
+            'lampiranpendukung' => ['required', 'mimes:pdf', 'max:2048'],
         ]);
 
-        $data = $request->except('_token');
-        BeritaAcaraNotaPPKB::create($data);
+        $file = $request->file('lampiranpendukung');
+        $fileName = $file->getClientOriginalName();
+        $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
+        $filePath = 'filelampiranpendukung/' . $fileName;
+
+        $notaPPKB = new BeritaAcaraNotaPPKB();
+        $notaPPKB->nomor_surat = $request->nomor_surat;
+        $notaPPKB->tanggal = $request->tanggal;
+        $notaPPKB->nama_perusahaan = $request->nama_perusahaan;
+        $notaPPKB->nama_kapal = $request->nama_kapal;
+        $notaPPKB->noppkb = $request->noppkb;
+        $notaPPKB->service_code = $request->service_code;
+        $notaPPKB->noukk = $request->noukk;
+        $notaPPKB->agen = $request->agen;
+        $notaPPKB->lokasi = $request->lokasi;
+        $notaPPKB->tujuan = $request->tujuan;
+        $notaPPKB->dibuatoleh = $request->dibuatoleh;
+        $notaPPKB->alasan = $request->alasan;
+        $notaPPKB->lampiranpendukung = $filePath;
+        $notaPPKB->save();
         return redirect('/suratpenghapusanppkb')->with('success', 'Data berhasil ditambahkan');
     }
 

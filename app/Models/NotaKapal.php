@@ -10,9 +10,11 @@ class NotaKapal extends Model
     use HasFactory;
     protected $table = 'nota_kapals';
     protected $guarded = [];
-    
+
     public function getDataNoKa()
     {
-        return $this->count();
+        // format date to date-month-year
+        date('d-m-Y', strtotime($this->tanggal));
+        return $this::count();
     }
 }

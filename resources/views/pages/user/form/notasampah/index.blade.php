@@ -49,7 +49,7 @@
                 :
             </div>
             <div class="col-sm-9">
-                <input class="form-control" name="lampiranpendukung" type="file" id="lampiranpendukung">
+                <input class="form-control" name="lampiranpendukung" type="file" id="lampiranpendukung" accept=".pdf">
             </div>
         </div>
         <div class="form-group mb-3 row">

@@ -15,6 +15,7 @@ class NotaKapalController extends Controller
      */
     public function index()
     {
+        // orderBy('id', 'asc')
         $notaKapals = NotaKapal::orderBy('id', 'asc')->get();
         return view('pages.admin.beritaacara.beritaacaranotakapal.keluhan.index', compact('notaKapals'));
     }
@@ -54,11 +55,20 @@ class NotaKapalController extends Controller
             'namakapal' => 'required',
             'tanggal' => 'required',
             'deskripsi' => 'required',
-            'lampiranpendukung' => 'required',
+            'lampiranpendukung' => ['required', 'mimes:pdf', 'max:2048'],
         ]);
 
-        $data = $request->except('_token');
-        NotaKapal::create($data);
+        $file = $request->file('lampiranpendukung');
+        $fileName = $file->getClientOriginalName();
+        $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
+        $filePath = 'filelampiranpendukung/' . $fileName;
+
+        $notaKapal = new NotaKapal();
+        $notaKapal->namakapal = $request->namakapal;
+        $notaKapal->tanggal = $request->tanggal;
+        $notaKapal->deskripsi = $request->deskripsi;
+        $notaKapal->lampiranpendukung = $filePath;
+        $notaKapal->save();
         return redirect('/formnotakapal')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -74,11 +84,26 @@ class NotaKapalController extends Controller
             'nomor_nota_kapal' => 'required',
             'dibuatoleh' => 'required',
             'keterangan' => 'required',
-            'lampiranpendukung' => 'required',
+            'lampiranpendukung' => ['required', 'mimes:pdf', 'max:2048'],
         ]);
 
-        $data = $request->except('_token');
-        BeritaAcaraNotaKapal::create($data);
+        $file = $request->file('lampiranpendukung');
+        $fileName = $file->getClientOriginalName();
+        $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
+        $filePath = 'filelampiranpendukung/' . $fileName;
+
+        $notaKapal = new BeritaAcaraNotaKapal();
+        $notaKapal->nomor_surat = $request->nomor_surat;
+        $notaKapal->tanggal = $request->tanggal;
+        $notaKapal->nama_perusahaan = $request->nama_perusahaan;
+        $notaKapal->no_surat_perusahaan = $request->no_surat_perusahaan;
+        $notaKapal->tanggal_surat = $request->tanggal_surat;
+        $notaKapal->perihal = $request->perihal;
+        $notaKapal->nomor_nota_kapal = $request->nomor_nota_kapal;
+        $notaKapal->dibuatoleh = $request->dibuatoleh;
+        $notaKapal->keterangan = $request->keterangan;
+        $notaKapal->lampiranpendukung = $filePath;
+        $notaKapal->save();
         return redirect('/suratnotakapal')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -124,7 +149,6 @@ class NotaKapalController extends Controller
      */
     public function destroy($id)
     {
-        // delete by id
         NotaKapal::find($id)->delete();
         return redirect('/suratnotakapal')->with('success', 'Data berhasil dihapus');
     }

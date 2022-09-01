@@ -57,8 +57,18 @@ class NotaSampahController extends Controller
             'lampiranpendukung' => 'required',
         ]);
 
-        $data = $request->except('_token');
-        NotaSampah::create($data);
+        $file = $request->file('lampiranpendukung');
+        $fileName = $file->getClientOriginalName();
+        $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
+        $filePath = 'filelampiranpendukung/' . $fileName;
+
+        $notaSampahs = new NotaSampah();
+        $notaSampahs->namakapal = $request->namakapal;
+        $notaSampahs->tanggal = $request->tanggal;
+        $notaSampahs->nomornota = $request->nomornota;
+        $notaSampahs->deskripsi = $request->deskripsi;
+        $notaSampahs->lampiranpendukung = $filePath;
+        $notaSampahs->save();
         return redirect('formnotasampah')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -69,11 +79,21 @@ class NotaSampahController extends Controller
             'tanggal' => 'required',
             'tanggalnotasampahkapal' => 'required',
             'dibuatoleh' => 'required',
-            'lampiranpendukung' => 'required',
+            'lampiranpendukung' => ['required', 'mimes:pdf', 'max:2048'],
         ]);
 
-        $data = $request->except('_token');
-        BeritaAcaraNotaSampah::create($data);
+        $file = $request->file('lampiranpendukung');
+        $fileName = $file->getClientOriginalName();
+        $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
+        $filePath = 'filelampiranpendukung/' . $fileName;
+
+        $notaSampahs = new BeritaAcaraNotaSampah();
+        $notaSampahs->nomor_surat = $request->nomor_surat;
+        $notaSampahs->tanggal = $request->tanggal;
+        $notaSampahs->tanggalnotasampahkapal = $request->tanggalnotasampahkapal;
+        $notaSampahs->dibuatoleh = $request->dibuatoleh;
+        $notaSampahs->lampiranpendukung = $filePath;
+        $notaSampahs->save();
         return redirect('/suratnotasampahkapal')->with('success', 'Data berhasil ditambahkan');
     }
 

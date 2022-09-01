@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeritaAcaraNotaKapal;
+use App\Models\BeritaAcaraNotaPPKB;
+use App\Models\BeritaAcaraNotaSampah;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,7 +16,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $totalBaNoKa = BeritaAcaraNotaKapal::getCountDataBaNoKa();
+        $totalBaNoSa = BeritaAcaraNotaSampah::getCountDataBaNoSa();
+        $totalBanoPPKB = BeritaAcaraNotaPPKB::getCountDataBaNoPPKB();
+        return view('dashboard', compact('totalBaNoKa', 'totalBaNoSa', 'totalBanoPPKB'));
     }
 
     /**

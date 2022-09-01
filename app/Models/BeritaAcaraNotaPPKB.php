@@ -10,5 +10,14 @@ class BeritaAcaraNotaPPKB extends Model
     use HasFactory;
     protected $table = 'berita_acara_nota_ppkbs';
     protected $guarded = [];
-}
 
+    public  function getDataBaNoPPKB()
+    {
+        return $this::count();
+    }
+
+    public static function getCountDataBaNoPPKB()
+    {
+        return self::count();
+    }
+}
