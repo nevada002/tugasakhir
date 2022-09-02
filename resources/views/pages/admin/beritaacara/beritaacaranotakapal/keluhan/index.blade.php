@@ -12,6 +12,7 @@
                 <th scope="col" class="text-center">Nama Kapal</th>
                 <th scope="col" class="text-center">Tanggal</th>
                 <th scope="col" class="text-center">Deskripsi Keluhan</th>
+                <th scope="col" class="text-center">Status</th>
                 <th scope="col" class="text-center">Lampiran Pendukung</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
@@ -22,6 +23,8 @@
                     <th class="text-center" scope="row">{{ $datas->namakapal }}</th>
                     <td class="text-center">{{ $datas->tanggal }}</td>
                     <td>{{ $datas->deskripsi }}</td>
+                    <td class="text-center"><input class="text-center mb-1" disabled id="Proses" type="text"
+                            style="text-decoration: transparent; border: none;" name="{{ $datas->id }}"></td>
                     <td class="text-center">
                         @if ($datas->lampiranpendukung != null)
                             <a class="btn btn-secondary" style="text-decoration: none"
@@ -32,15 +35,12 @@
                         @endif
                     </td>
                     <td class="justify-content-center" style="text-align: center">
-                        <input class="text-center mb-1" disabled id="Proses" type="text"
-                            style="text-decoration: transparent; border: none;" name="{{ $datas->id }}">
                         <select class="form-select" name="status_id" onchange="onChangeSelect(event)"
                             onclick="onClick(event)">
                             @forelse ($status as $statuses)
-                                <a href="/keluhannotakapal/store/{{ $datas->id }}/{{ $statuses->id }}"></a>
-                                <option class="text-center" name="status_id" id="{{ $statuses->id }}" value="{{ $statuses->id }}">
+                                <option class="text-center" name="status_id" id="{{ $statuses->id }}"
+                                    value="{{ $statuses->id }}">
                                     {{ $statuses->name }}</option>
-                                </a>
                             @empty
                                 -
                             @endforelse
@@ -59,10 +59,10 @@
     function onClick(e) {
         var id = document.getElementById("Proses").name
         var status_id = document.getElementById("Proses").value
-        var url = "/keluhannotakapal/store/" + id + "/" + status_id
+        var url = "/api/keluhannotakapal/store/" + id + "/" + status_id
         $.ajax({
             url: url,
-            type: 'GET',
+            type: 'POST',
             success: function(response) {
                 console.log(response)
             }

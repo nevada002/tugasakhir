@@ -117,23 +117,40 @@ class NotaKapalController extends Controller
         return redirect('/suratnotakapal')->with('success', 'Data berhasil ditambahkan');
     }
 
-    public function store3($id,$statusId)
+    public function store3($id, $statusId)
     {
         $notaKapal = NotaKapal::where('id', $id)->first();
         $beritaAcaraNotaKapal = BeritaAcaraNotaKapal::where('nota_kapal_id', $id)->first();
 
-        $hasil = Hasil::create([
-            'no_berita_acara' => $beritaAcaraNotaKapal->nomor_surat,
-            'jenis_berita_acara' => $notaKapal->deskripsi,
-            'status_id' => $statusId,
-        ]);
-
-        if ($hasil) {
-            $notaKapal->status_id = $statusId;
-            $notaKapal->save();
+        $check_hasil = Hasil::where('jenis_berita_acara', $notaKapal->deskripsi)->first();
+        if ($check_hasil) {
+            $check_hasil->jenis_berita_acara = $notaKapal->deskripsi;
+            $check_hasil->no_berita_acara = $beritaAcaraNotaKapal->nomor_surat;
+            $check_hasil->status_id = $statusId;
+            $check_hasil->save();
+            if ($check_hasil) {
+                $notaKapal->status_id = $statusId;
+                $notaKapal->save();
+            }
+        } else {
+            $hasil = new Hasil;
+            $hasil->jenis_berita_acara = $notaKapal->deskripsi;
+            $hasil->no_berita_acara = $beritaAcaraNotaKapal->nomor_surat;
+            $hasil->status_id = $statusId;
+            $hasil->save();
+            if ($hasil) {
+                $notaKapal->status_id = $statusId;
+                $notaKapal->save();
+            }
         }
+        // $hasil = Hasil::create([
+        //     'no_berita_acara' => $beritaAcaraNotaKapal->nomor_surat,
+        //     'jenis_berita_acara' => $notaKapal->deskripsi,
+        //     'status_id' => $statusId,
+        // ]);
 
-        return redirect('/beritaacaranotakapal')->with('success', 'Data berhasil diubah');
+
+        // return redirect('/beritaacaranotakapal')->with('success', 'Data berhasil diubah');
     }
 
     /**

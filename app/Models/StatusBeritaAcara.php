@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class StatusBeritaAcara extends Model
 {
     use HasFactory;
+    public function hasil()
+    {
+        return $this->hasOne(Hasil::class);
+    }
 }
