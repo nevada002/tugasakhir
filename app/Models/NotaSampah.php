@@ -9,7 +9,25 @@ class NotaSampah extends Model
 {
     use HasFactory;
     protected $table = 'nota_sampahs';
-    protected $guarded = [];
+    protected $fillable = [
+        'namakapal',
+        'tanggal',
+        'nomornota',
+        'deskripsi',
+        'lampiranpendukung',
+        'status',
+        'created_by',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($data) {
+            $data->created_by = auth()->id();
+            return $data;
+        });
+    }
     
     public function getDataNoSa()
     {

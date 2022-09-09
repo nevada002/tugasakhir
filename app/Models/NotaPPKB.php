@@ -9,7 +9,26 @@ class NotaPPKB extends Model
 {
     use HasFactory;
     protected $table = 'nota_ppkbs';
-    protected $guarded = [];
+    protected $fillable = [
+        'namakapal',
+        'negara',
+        'noppkb',
+        'service',
+        'agen',
+        'alasan',
+        'status',
+        'created_by',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($data) {
+            $data->created_by = auth()->id();
+            return $data;
+        });
+    }
     
     public function getDataNoPPKB()
     {

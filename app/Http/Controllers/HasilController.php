@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Status;
 use App\Models\Hasil;
 use App\Models\NotaKapal;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HasilController extends Controller
 {
@@ -16,72 +18,22 @@ class HasilController extends Controller
     public function index()
     {
         $hasils = Hasil::orderBy('id', 'asc')->get();
-        return view('pages.user.hasil.index', compact('hasils'));
+        return view('user.hasil.index', compact('hasils'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function pdf($id)
     {
-        //
-    }
+        $hasil = Hasil::query()
+            ->with('berita_acara.pihak_verifikasi', 'berita_acara.penanda_tangan', 'berita_acara.nota', 'agen')
+            ->whereHas('berita_acara')
+            ->where('status', Status::APPROVED)
+            ->findOrFail($id);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $created_at = $hasil->berita_acara->created_at->locale('id');
+        $status_pihak_verifikasi = Status::from($hasil->berita_acara->pihak_verifikasi_status)->label();
+        $status_penanda_tangan = Status::from($hasil->berita_acara->penanda_tangan_status)->label();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $pdf = Pdf::loadView('pdf.nota-kapal', compact('hasil', 'created_at', 'status_pihak_verifikasi', 'status_penanda_tangan'));
+        return $pdf->stream();
     }
 }

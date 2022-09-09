@@ -3,7 +3,7 @@
     <nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light">
         <div class="container ">
             <a class="navbar-brand" href="/">
-                <img src="assets/img/pelindo.svg" alt="" width="250" height="54.72">
+                <img src="{{ url('assets/img/pelindo.svg') }}" alt="" width="250" height="54.72">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
             <div class="col-7 justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+                        <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
                     <li class="nav-item dropdown">
@@ -21,12 +21,9 @@
                             Keluhan
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background: #0475BD;">
-                            <li><a class="dropdown-item text-light" href="/formnotakapal">Form Keluhan Nota
-                                    Kapal</a></li>
-                            <li><a class="dropdown-item text-light" href="/formnotasampah">Form Keluhan Nota
-                                    Sampah Kapal</a></li>
-                            <li><a class="dropdown-item text-light" href="/formnotappkb">Form Keluhan Penghapusan
-                                    PPKB</a></li>
+                            <li><a class="dropdown-item text-light" href="{{ route('keluhan.nota-kapal.index') }}">Form Keluhan Nota Kapal</a></li>
+                            <li><a class="dropdown-item text-light" href="{{ route('keluhan.nota-sampah-kapal.index') }}">Form Keluhan Nota Sampah Kapal</a></li>
+                            <li><a class="dropdown-item text-light" href="{{ route('keluhan.penghapusan-ppkb.index') }}">Form Keluhan Penghapusan PPKB</a></li>
                         </ul>
                     </li>
                     </li>
@@ -44,17 +41,24 @@
                             <li><a class="dropdown-item text-light" href="index.php">Logout</a></li>
                         </ul>
                     </li> --}}
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/login">Masuk</a>
-                    </li>
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="#">|</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/regist">Daftar</a>
-                    </li>
+                    @if (auth()->check()) 
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ auth()->user()->email }} </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="logout">Logout</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Masuk</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">|</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Daftar</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

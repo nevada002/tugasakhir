@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nota_sampahs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('namakapal');
             $table->date('tanggal');
             $table->string('nomornota');
             $table->text('deskripsi');
             $table->text('lampiranpendukung');
+            $table->tinyInteger('status');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

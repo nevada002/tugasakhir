@@ -14,10 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hasils', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('no_berita_acara');
+            $table->id();
+            $table->nullableMorphs('berita_acara');
+            $table->string('no_keluhan');
+            $table->string('no_berita_acara')->nullable();
             $table->string('jenis_berita_acara');
-            $table->foreignId('status_id')->constrained('status_berita_acaras');
+            $table->tinyInteger('status');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

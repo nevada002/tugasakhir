@@ -14,13 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nota_ppkbs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('namakapal');
             $table->string('negara');
             $table->string('noppkb');
             $table->string('service');
             $table->string('agen');
             $table->text('alasan');
+            $table->tinyInteger('status');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

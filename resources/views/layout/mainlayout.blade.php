@@ -10,7 +10,7 @@
         <section class="navbar-user">
             @include('layout.partials.nav')
         </section>
-        <section class="main-user">
+        <section class="main-user" style="min-height: 62vh;">
             <div class="container my-5">
                 @yield('content')
             </div>
@@ -19,6 +19,8 @@
             @include('layout.partials.footer')
         </section>
     </div>
+
+    @stack('scripts')
 </body>
 
 </html>

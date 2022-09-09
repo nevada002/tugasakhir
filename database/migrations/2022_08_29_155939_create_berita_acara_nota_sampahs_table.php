@@ -14,12 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('berita_acara_nota_sampahs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
+            $table->foreignId('nota_sampah_id')->nullabel()->constrained('nota_sampahs');
             $table->string('nomor_surat');
             $table->date('tanggal');
             $table->date('tanggalnotasampahkapal');
             $table->string('dibuatoleh');
             $table->text('lampiranpendukung');
+            $table->unsignedBigInteger('penanda_tangan_id');
+            $table->tinyInteger('penanda_tangan_status')->nullable();
+            $table->timestamp('penanda_tangan_time')->nullable();
+            $table->unsignedBigInteger('pihak_verifikasi_id');
+            $table->tinyInteger('pihak_verifikasi_status')->nullable();
+            $table->timestamp('pihak_verifikasi_time')->nullable();
             $table->timestamps();
         });
     }

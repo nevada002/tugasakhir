@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('berita_acara_nota_kapals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nota_kapal_id')->nullabel()->constrained('nota_kapals');
+            $table->foreignId('nota_id')->nullabel()->constrained('nota_kapals');
             $table->string('nomor_surat');
             $table->string('tanggal');
             $table->string('nama_perusahaan');
@@ -25,6 +25,12 @@ return new class extends Migration
             $table->string('dibuatoleh');
             $table->string('keterangan');
             $table->text('lampiranpendukung');
+            $table->unsignedBigInteger('penanda_tangan_id');
+            $table->tinyInteger('penanda_tangan_status')->nullable();
+            $table->timestamp('penanda_tangan_time')->nullable();
+            $table->unsignedBigInteger('pihak_verifikasi_id');
+            $table->tinyInteger('pihak_verifikasi_status')->nullable();
+            $table->timestamp('pihak_verifikasi_time')->nullable();
             $table->timestamps();
         });
     }
