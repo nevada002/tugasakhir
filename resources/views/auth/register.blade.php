@@ -6,6 +6,11 @@
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">{{$errors->first()}}</div>
             @endif
+
+            @if (session()->has('success'))
+                <div class="alert alert-success">{{ session()->get('success') }}</div>
+            @endif
+
             <div class="card border-0">
                 <div class="card-body px-5 pb-5">
                     <h1 class="card-title text-center my-5">Daftar</h1>
@@ -123,14 +128,11 @@
                         </div>
                         <div class="col mb-3">
                             <select name="jabatan" class="form-select" aria-label="Default select example" required>
-                                <option selected disabled>- Pilih -</option>
-                                <option value="1">Supervisor Perencanaan Pemanduan & Penundaan</option>
-                                <option value="2">Supervisor Aneka Usaha</option>
-                                <option value="3">Manager Properti</option>
-                                <option value="4">Manager Komersial</option>
-                                <option value="5">Manager Adm. Kepanduan, Komunikasi & Prasarana Pemanduan</option>
-                                <option value="6">Manager Sistem Infomasi</option>
-                                <option value="7">Manager Perbendaharaan</option>
+                                <option selected disabled>-- Pilih --</option>
+
+                                @foreach (\App\Enum\Jabatan::cases() as $jabatan)
+                                    <option value="{{ $jabatan->value }}">{{ $jabatan->label() }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col mb-3">
@@ -162,14 +164,11 @@
                         </div>
                         <div class="col mb-3">
                             <select name="jabatan" class="form-select" aria-label="Default select example" required>
-                                <option selected disabled>- Pilih -</option>
-                                <option value="1">Supervisor Perencanaan Pemanduan & Penundaan</option>
-                                <option value="2">Supervisor Aneka Usaha</option>
-                                <option value="3">Manager Properti</option>
-                                <option value="4">Manager Komersial</option>
-                                <option value="5">Manager Adm. Kepanduan, Komunikasi & Prasarana Pemanduan</option>
-                                <option value="6">Manager Sistem Infomasi</option>
-                                <option value="7">Manager Perbendaharaan</option>
+                                <option selected disabled>-- Pilih --</option>
+                                
+                                @foreach (\App\Enum\Jabatan::cases() as $jabatan)
+                                    <option value="{{ $jabatan->value }}">{{ $jabatan->label() }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col mb-3">

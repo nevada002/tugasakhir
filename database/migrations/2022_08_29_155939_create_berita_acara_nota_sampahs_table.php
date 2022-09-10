@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('berita_acara_nota_sampahs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nota_sampah_id')->nullabel()->constrained('nota_sampahs');
+            $table->foreignId('nota_id')->nullabel()->constrained('nota_sampahs');
             $table->string('nomor_surat');
             $table->date('tanggal');
             $table->date('tanggalnotasampahkapal');

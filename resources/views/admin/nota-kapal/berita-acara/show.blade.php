@@ -1,59 +1,92 @@
 @extends('layout.adminlayout')
-@section('header')
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page" style="color: #fff">Surat Berita Acara Nota Kapal</li>
-    </ol>
-@endsection
+@section('title', 'Detail Surat Berita Acara Nota Kapal')
+
 @section('content')
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nomor Surat</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Nama Perusahaan</th>
-                <th scope="col">No Surat Perusahaan</th>
-                <th scope="col">Tanggal Surat</th>
-                <th scope="col">Perihal</th>
-                <th scope="col">Nomor Nota Kapal</th>
-                <th scope="col">Keterangan</th>
-                <th scope="col">Di Buat Oleh</th>
-                <th scope="col">Lampiran Pendukung</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>
-        {{-- <tbody>
-            @forelse ($notaKapals as $datas)
-                <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $datas->nomor_surat }}</td>
-                    <td>{{ $datas->tanggal }}</td>
-                    <td>{{ $datas->nama_perusahaan }}</td>
-                    <td>{{ $datas->no_surat_perusahaan }}</td>
-                    <td>{{ $datas->tanggal_surat }}</td>
-                    <td>{{ $datas->perihal }}</td>
-                    <td>{{ $datas->nomor_nota_kapal }}</td>
-                    <td>{{ $datas->keterangan }}</td>
-                    <td>{{ $datas->dibuatoleh }}</td>
-                    <td>
-                        @if ($datas->lampiranpendukung != null)
-                            <a class="btn btn-secondary" style="text-decoration: none"
-                                href="{{ asset('storage/public/filelampiranpendukung' . $datas->lampiranpendukung) }}"
-                                target="_blank">Download</a>
-                        @else
-                            -
-                        @endif
-                    </td>
-                    <td class="d-flex justify-content-space-between">
-                        <a href="{{ route('showBeritaAcaraNotaKapal', ['id' => $datas->id]) }}" target="_blank"
-                            class="btn btn-primary"><i class="bi bi-eye"></i></a>
-                        <a href="#" class="btn btn-success ms-1"><i class="bi bi-pencil-square"></i></a>
-                        <a href="#" class="btn btn-secondary ms-1"><i class="bi bi-check-circle"></i></a>
-                        <a href="#" class="btn btn-info ms-1"><i class="bi bi-list-check"></i></a>
-                    </td>
-                </tr>
-            @empty
-            @endforelse
-        </tbody> --}}
-    </table>
+    @if ($errors->any())
+        <div class="alert alert-danger">{{ $errors->first() }}</div>
+    @endif
+
+    <a href="{{ route('admin.nota-kapal.berita-acara.index') }}" class="btn btn-danger mb-3">
+        Kembali
+    </a>
+
+
+    <div class="form-group mb-3 row">
+        {{-- <label class="col-sm-2 col-form-label" for="nomor_surat">Nomor Surat</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="nomor_surat" name="nomor_surat" placeholder="Nomor Surat">
+        </div> --}}
+        <label class="col-sm-2 col-form-label" for="nomor_nota_kapal">Nomor Nota Kapal</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" value="{{ $beritaAcara->nota->namakapal }}" disabled>
+        </div>
+        <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" id="tanggal" name="tanggal" 
+                placeholder="Tanggal" value="{{ $beritaAcara->tanggal->format('Y-m-d') }}" @disabled(true)>
+        </div>
+    </div>
+    <div class="form-group mb-3 row">
+        <label class="col-sm-2 col-form-label" for="nama_perusahaan">Nama Perusahaan</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan"
+                placeholder="Nama Perusahaan" value="{{ $beritaAcara->nama_perusahaan }}" @disabled(true)>
+        </div>
+        <label class="col-sm-2 col-form-label" for="no_surat_perusahaan">No Surat Perusahaan</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="no_surat_perusahaan" name="no_surat_perusahaan"
+                placeholder="No Surat Perusahaan" value="{{ $beritaAcara->no_surat_perusahaan }}" @disabled(true)>
+        </div>
+    </div>
+    <div class="form-group mb-3 row">
+        <label class="col-sm-2 col-form-label" for="tanggal_surat">Tanggal Surat</label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" id="tanggal_surat" name="tanggal_surat"
+                placeholder="Tanggal Surat" value="{{ $beritaAcara->tanggal_surat->format('Y-m-d') }}" @disabled(true)>
+        </div>
+        <label class="col-sm-2 col-form-label" for="perihal">Perihal</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="perihal" name="perihal" 
+                placeholder="Perihal" value="{{ $beritaAcara->perihal }}" @disabled(true)>
+        </div>
+    </div>
+    <div class="form-group mb-3 row">
+        {{-- <label class="col-sm-2 col-form-label" for="nomor_nota_kapal">Nomor Nota Kapal</label>
+        <div class="col-sm-4">
+            <select class="form-select" name="nota_id">
+                <option name="">Pilih nota kapal</option>
+                @foreach ($notaKapal as $d)
+                    <option id="{{ $d->id }}" value="{{ $d->id }}" name="nota_id">
+                        {{ $d->namakapal }}</option>
+                @endforeach
+            </select>
+        </div> --}}
+        <label class="col-sm-2 col-form-label" for="lampiranpendukung">Lampiran Pendukung</label>
+        <div class="col-sm-4">
+            <input type="file" class="form-control" id="lampiranpendukung" name="lampiranpendukung" 
+                laceholder="Lampiran Pendukung" accept=".pdf" disabled>
+        </div>
+        <label class="col-sm-2 col-form-label" for="dibuatoleh">Di Buat Oleh</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="dibuatoleh" name="dibuatoleh" 
+                placeholder="Di Buat Oleh" value="{{ $beritaAcara->dibuatoleh }}" @disabled(true)>
+        </div>
+    </div>
+    <div class="form-group mb-3 row">
+        <label class="col-sm-2 col-form-label">Penanda Tangan</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" value="{{ $beritaAcara->penanda_tangan->name }}" disabled>
+        </div>
+        <label class="col-sm-2 col-form-label">Pihak Verifikasi</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" value="{{ $beritaAcara->pihak_verifikasi->name }}" disabled>
+        </div>
+    </div>
+    <div class="form-group mb-3 row">
+        <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
+        <div class="col-sm-10">
+            <textarea type="text" class="form-control" id="keterangan" name="keterangan" 
+                placeholder="Keterangan" rows="2" @disabled(true)>{{ $beritaAcara->keterangan }}</textarea>
+        </div>
+    </div>
 @endsection

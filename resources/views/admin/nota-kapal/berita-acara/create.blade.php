@@ -1,18 +1,13 @@
 @extends('layout.adminlayout')
 @section('title', 'Buat Surat Berita Acara Nota Kapal')
-@section('header')
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page" style="color: #fff">Buat Surat Berita Acara Nota Kapal</li>
-    </ol>
-@endsection
 @section('content')
-    <a href="{{ route('admin.nota-kapal.berita-acara.index') }}" class="btn btn-danger mb-3">
-        Kembali
-    </a>
-
     @if ($errors->any())
         <div class="alert alert-danger">{{ $errors->first() }}</div>
     @endif
+    
+    <a href="{{ route('admin.nota-kapal.berita-acara.index') }}" class="btn btn-danger mb-3">
+        Kembali
+    </a>
 
     <form action="{{ route('admin.nota-kapal.berita-acara.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -110,10 +105,9 @@
                 <input type="file" class="form-control" id="lampiranpendukung" name="lampiranpendukung" laceholder="Lampiran Pendukung" accept=".pdf">
             </div>
         </div> --}}
-        <div class="mb-3 row">
-            <div class="col-sm-11"></div>
-            <div class="col-sm-1">
-                <button class="btn btn-primary" type="submit">Kirim</button>
+        <div class="row justify-content-end">
+            <div class="col-1">
+                <button class="btn btn-primary w-100" type="submit">Kirim</button>
             </div>
         </div>
     </form>

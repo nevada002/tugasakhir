@@ -10,6 +10,7 @@ class BeritaAcaraNotaKapal extends Model
     use HasFactory;
 
     protected $table = 'berita_acara_nota_kapals';
+
     protected $fillable = [
         'nota_id',
         'nomor_surat',
@@ -33,16 +34,6 @@ class BeritaAcaraNotaKapal extends Model
         'tanggal' => 'date',
         'tanggal_surat' => 'date',
     ];
-
-    public function getDataBaNoKa()
-    {
-        return $this::count();
-    }
-    
-    public static function getCountDataBaNoKa()
-    {
-        return self::count();
-    }
 
     public function nota()
     {

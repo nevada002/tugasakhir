@@ -10,8 +10,9 @@ class BeritaAcaraNotaPPKB extends Model
     use HasFactory;
 
     protected $table = 'berita_acara_nota_ppkbs';
+    
     protected $fillable = [
-        'nota_pkkbs_id',
+        'nota_id',
         'nomor_surat',
         'tanggal',
         'nama_perusahaan',
@@ -33,13 +34,27 @@ class BeritaAcaraNotaPPKB extends Model
         'pihak_verifikasi_time',
     ];
 
-    public  function getDataBaNoPPKB()
+    public $casts = [
+        'tanggal' => 'date',
+    ];
+    
+    public function nota()
     {
-        return $this::count();
+        return $this->belongsTo(NotaPPKB::class, 'nota_id', 'id');
     }
 
-    public static function getCountDataBaNoPPKB()
+    public function penanda_tangan()
     {
-        return self::count();
+        return $this->belongsTo(User::class, 'penanda_tangan_id', 'id');
+    }
+
+    public function pihak_verifikasi()
+    {
+        return $this->belongsTo(User::class, 'pihak_verifikasi_id', 'id');
+    }
+
+    public function hasil()
+    {
+        return $this->morphOne(Hasil::class, 'berita_acara');
     }
 }

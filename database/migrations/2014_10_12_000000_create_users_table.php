@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('alamat')->nullable();
             $table->string('email')->unique();
+            $table->tinyInteger('jabatan')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role');
-            // $table->foreignId('role_id')->constrained('user_roles');
             $table->rememberToken();
             $table->timestamps();
         });

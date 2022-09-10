@@ -10,8 +10,9 @@ class BeritaAcaraNotaSampah extends Model
     use HasFactory;
 
     protected $table = 'berita_acara_nota_sampahs';
+    
     protected $fillable = [
-        'nota_sampah_id',
+        'nota_id',
         'nomor_surat',
         'tanggal',
         'tanggalnotasampahkapal',
@@ -25,13 +26,28 @@ class BeritaAcaraNotaSampah extends Model
         'pihak_verifikasi_time',
     ];
 
-    public function getDataBaNoSa()
+    public $casts = [
+        'tanggal' => 'date',
+        'tanggalnotasampahkapal' => 'date',
+    ];
+
+    public function nota()
     {
-        return $this::count();
+        return $this->belongsTo(NotaSampah::class, 'nota_id', 'id');
     }
 
-    public static function getCountDataBaNoSa()
+    public function penanda_tangan()
     {
-        return self::count();
+        return $this->belongsTo(User::class, 'penanda_tangan_id', 'id');
+    }
+
+    public function pihak_verifikasi()
+    {
+        return $this->belongsTo(User::class, 'pihak_verifikasi_id', 'id');
+    }
+
+    public function hasil()
+    {
+        return $this->morphOne(Hasil::class, 'berita_acara');
     }
 }

@@ -117,8 +117,7 @@
             </div>
             <hr>
             <li class="py-3">
-                <a style="color:#00225A; text-decoration: none" href="#" id="logout">Logout
-                </a>
+                <a style="color:#00225A; text-decoration: none" href="{{ route('admin.report') }}">Hasil</a>
             </li>
             <hr>
         </ul>

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enum\Status;
-use App\Models\BeritaAcaraNotaSampah;
+use App\Models\Hasil;
 use App\Models\NotaSampah;
-use App\Models\StatusBeritaAcara;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,38 +13,41 @@ class KeluhanNotaSampahKapalController extends Controller
     public function index()
     {
         $status = Status::cases();
-        $notaSampahs = NotaSampah::orderBy('id', 'asc')->get();
+        $notaSampahs = NotaSampah::where('status', Status::PROCESS)->orderBy('id', 'asc')->get();
         return view('admin.nota-sampah-kapal.keluhan.index', compact('notaSampahs', 'status'));
     }
 
     public function process(Request $request, $id)
     {
-        $notaKapal = BeritaAcaraNotaSampah::find($id)->first();
-        $notaKapal->update([
+        $nota = NotaSampah::findOrFail($id);
+        $hasil = Hasil::where('no_keluhan', $nota->no_keluhan)->first();
+        
+        if (!$nota || !$hasil) {
+            return response()->json([
+                'message' => 'Request tidak valid'
+            ], 400);
+        }
+
+        if (
+            !$nota->berita_acara || 
+            !$nota->berita_acara->penanda_tangan_time || 
+            !$nota->berita_acara->pihak_verifikasi_time
+        ) {
+            return response()->json([
+                'message' => 'Penanda tangan atau pihak verifikasi belum malakukan approval!'
+            ], 400);
+        }
+
+        $nota->update([
             'status' => $request->status
         ]);
-        // $beritaAcaraNotaKapal = BeritaAcaraNotaKapal::where('nota_id', $id)->first();
 
-        // $check_hasil = Hasil::where('jenis_berita_acara', $notaKapal->deskripsi)->first();
-        // if ($check_hasil) {
-        //     $check_hasil->jenis_berita_acara = $notaKapal->deskripsi;
-        //     $check_hasil->no_berita_acara = $beritaAcaraNotaKapal->nomor_surat;
-        //     $check_hasil->status = $request->status;
-        //     $check_hasil->save();
-        //     if ($check_hasil) {
-        //         $notaKapal->status = $request->status;
-        //         $notaKapal->save();
-        //     }
-        // } else {
-        //     $hasil = new Hasil;
-        //     $hasil->jenis_berita_acara = $notaKapal->deskripsi;
-        //     $hasil->no_berita_acara = $beritaAcaraNotaKapal->nomor_surat;
-        //     $hasil->status = $request->status;
-        //     $hasil->save();
-        //     if ($hasil) {
-        //         $notaKapal->status = $request->status;
-        //         $notaKapal->save();
-        //     }
-        // }
+        $hasil->update([
+            'status' => $request->status
+        ]);
+
+        return response()->json([
+            'message' => 'Sukses' 
+        ]);
     }
 }

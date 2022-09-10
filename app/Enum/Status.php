@@ -23,8 +23,8 @@ enum Status: int
         return match($this) 
         {
             self::PROCESS => 'Proses',   
-            self::REJECTED => 'Terima',   
-            self::APPROVED => 'Tolak',   
+            self::REJECTED => 'Tolak',   
+            self::APPROVED => 'Terima',   
         };
     }
 

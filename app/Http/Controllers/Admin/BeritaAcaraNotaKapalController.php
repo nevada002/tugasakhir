@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enum\Role;
+use App\Enum\Status;
 use App\Models\BeritaAcaraNotaKapal;
 use App\Models\NotaKapal;
 use Illuminate\Http\Request;
@@ -15,10 +16,9 @@ class BeritaAcaraNotaKapalController extends Controller
     public function index()
     {
         $beritaAcaras = BeritaAcaraNotaKapal::query();
-        // $beritaAcaras->where(function($q) {
-        //     $q->whereNull('penanda_tangan_time');
-        //     $q->orWhereNull('pihak_verifikasi_time');
-        // });
+        $beritaAcaras->whereHas('nota', function($q) {
+            $q->where('status', Status::PROCESS);
+        });
 
         if (!auth()->user()->isCustomerService()) {
             $beritaAcaras->where(function($q) {
@@ -56,8 +56,8 @@ class BeritaAcaraNotaKapalController extends Controller
             'pihak_verifikasi_id' => 'required',
         ]);
 
-        $notaKapal = NotaKapal::find($request->nota_id);
-        if (!$notaKapal) {
+        $nota = NotaKapal::find($request->nota_id);
+        if (!$nota) {
             return redirect()->back()->withErrors(['nota_id' => 'Nota kapal tidak ditemukan']);
         }
 
@@ -67,7 +67,7 @@ class BeritaAcaraNotaKapalController extends Controller
 
         $beritaAcara = BeritaAcaraNotaKapal::create([
             'nota_id' => $request->nota_id,
-            'nomor_surat' => $notaKapal->no_berita_acara,
+            'nomor_surat' => $nota->no_berita_acara,
             'tanggal' => $request->tanggal,
             'nama_perusahaan' => $request->nama_perusahaan,
             'no_surat_perusahaan' => $request->no_surat_perusahaan,
@@ -81,12 +81,12 @@ class BeritaAcaraNotaKapalController extends Controller
         ]);
 
         Hasil::query()
-            ->where('no_keluhan', $notaKapal->no_keluhan)
+            ->where('no_keluhan', $nota->no_keluhan)
             ->first()
             ->update([
                 'berita_acara_type' => get_class($beritaAcara),
                 'berita_acara_id' => $beritaAcara->id,
-                'no_berita_acara' => $notaKapal->no_berita_acara
+                'no_berita_acara' => $nota->no_berita_acara
             ]);
 
         return redirect()
@@ -110,19 +110,47 @@ class BeritaAcaraNotaKapalController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        // $hasil = Hasil::query()
-        //     ->with('berita_acara.pihak_verifikasi', 'berita_acara.penanda_tangan', 'berita_acara.nota', 'agen')
-        //     ->whereHas('berita_acara')
-        //     ->where('status', Status::APPROVED)
-        //     ->findOrFail($id);
+        $beritaAcara = BeritaAcaraNotaKapal::with('nota')->findOrFail($id);
+        return view('admin.nota-kapal.berita-acara.show', compact('beritaAcara'));
+    }
 
-        // $created_at = $hasil->berita_acara->created_at->locale('id');
-        // $status_pihak_verifikasi = Status::from($hasil->berita_acara->pihak_verifikasi_status)->label();
-        // $status_penanda_tangan = Status::from($hasil->berita_acara->penanda_tangan_status)->label();
+    public function edit($id)
+    {
+        $beritaAcara = BeritaAcaraNotaKapal::findOrFail($id);
+        $pihakVerifikasi = User::where('role', Role::VERIFICATOR)->get();
+        $penandaTangan = User::where('role', Role::SIGNER)->get();
+        $notaKapal = NotaKapal::whereDoesntHave('berita_acara')->get();
+        return view('admin.nota-kapal.berita-acara.edit', compact('beritaAcara', 'notaKapal', 'pihakVerifikasi', 'penandaTangan'));
+    }
 
-        // $pdf = Pdf::loadView('pdf.nota-kapal', compact('hasil', 'created_at', 'status_pihak_verifikasi', 'status_penanda_tangan'));
-        // return $pdf->stream();
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'tanggal' => 'required',
+            'nama_perusahaan' => 'required',
+            'no_surat_perusahaan' => 'required',
+            'tanggal_surat' => 'required',
+            'perihal' => 'required',
+            'dibuatoleh' => 'required',
+            'keterangan' => 'required',
+            'lampiranpendukung' => ['nullable', 'mimes:pdf', 'max:2048'],
+            'penanda_tangan_id' => 'required',
+            'pihak_verifikasi_id' => 'required',
+        ]);
+
+        if ($request->lampiranpendukung) {
+            $file = $request->file('lampiranpendukung');
+            $fileName = $file->getClientOriginalName();
+            $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
+            $data['lampiranpendukung'] = $fileName;
+        }
+
+        BeritaAcaraNotaKapal::findOrFail($id)->update($data);
+
+        return redirect()
+            ->route('admin.nota-kapal.berita-acara.index')
+            ->with('success', 'Data berhasil diperbarui');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enum\Role;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -41,11 +42,9 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        
-        if ($user->role <= 1) {
-            return redirect()->to('/');
+        if ($user->role <= Role::AGEN->value) {
+            return redirect()->to('/home');
         }
-        // dd($user->toArray());
 
         return redirect()->to('/admin/dashboard');
     }

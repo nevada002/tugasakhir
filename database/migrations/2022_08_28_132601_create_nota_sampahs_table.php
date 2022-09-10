@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('nota_sampahs', function (Blueprint $table) {
             $table->id();
+            $table->string('no_keluhan');
+            $table->string('no_berita_acara');
             $table->string('namakapal');
             $table->date('tanggal');
             $table->string('nomornota');

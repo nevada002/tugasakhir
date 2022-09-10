@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enum\Jabatan;
+use App\Enum\Role;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -50,10 +55,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'role' => ['required', 'in:1,2,3,4'],
+            'role' => ['required', 'in:' . implode(',', Role::values())],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'alamat' => ['required_if:role,1', 'string'],
+            'alamat' => ['required_if:role,' . Role::AGEN->value, 'string'],
+            'jabatan' => [
+                'required_if:role,' . Role::SIGNER->value, 
+                'required_if:role,' . Role::VERIFICATOR->value, 
+                'in:' . implode(',', Jabatan::values())
+            ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -71,7 +81,13 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'alamat' => @$data['alamat'],
+            'jabatan' => @$data['jabatan'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function registered(Request $request, $user)
+    {
+        return redirect()->to('/home');
     }
 }

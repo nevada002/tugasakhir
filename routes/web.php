@@ -16,11 +16,12 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::view('/', 'home');
-Auth::routes(['reset' => false, 'verify' => false]);
+Auth::routes(['reset' => false, 'verify' => true]);
 
-
-Route::middleware('auth')->group(function() {
+Route::middleware('auth', 'verified')->group(function() {
     //User
+    Route::view('/home', 'home')->name('home');
+
     Route::prefix('keluhan')->name('keluhan.')->group(function() {
         Route::get('nota-kapal', [\App\Http\Controllers\KeluhanNotaKapalController::class, 'create'])->name("nota-kapal.index");
         Route::post('nota-kapal/store', [\App\Http\Controllers\KeluhanNotaKapalController::class, 'store'])->name("nota-kapal.store");
@@ -35,9 +36,14 @@ Route::middleware('auth')->group(function() {
     Route::get('hasil', [\App\Http\Controllers\HasilController::class, 'index']);
     Route::get('hasil/{id}/pdf', [\App\Http\Controllers\HasilController::class, 'pdf'])->name('hasil.pdf');
 
+    Route::get('edit-profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('edit-profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
     //Admin
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {
         Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('edit-profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('edit-profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
         
         //Nota Kapal
         Route::prefix('nota-kapal')->name('nota-kapal.')->group(function() {
@@ -51,6 +57,7 @@ Route::middleware('auth')->group(function() {
             Route::post('berita-acara/approval/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaKapalController::class, 'approval'])->name('berita-acara.approval');
 
             Route::get('berita-acara/edit/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaKapalController::class, 'edit'])->name('berita-acara.edit');
+            Route::post('berita-acara/edit/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaKapalController::class, 'update'])->name('berita-acara.update');
             Route::get('berita-acara/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaKapalController::class, 'show'])->name("berita-acara.show");
         });
 
@@ -63,9 +70,11 @@ Route::middleware('auth')->group(function() {
             Route::get('berita-acara', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'index'])->name('berita-acara.index');
             Route::get('berita-acara/create', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'create'])->name('berita-acara.create');
             Route::post('berita-acara', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'store'])->name('berita-acara.store');
+            Route::post('berita-acara/approval/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'approval'])->name('berita-acara.approval');
 
-            Route::get('berita-acara/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'show'])->name("berita-acara.show");
             Route::get('berita-acara/edit/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'edit'])->name('berita-acara.edit');
+            Route::post('berita-acara/edit/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'update'])->name('berita-acara.update');
+            Route::get('berita-acara/{id}', [\App\Http\Controllers\Admin\BeritaAcaraNotaSampahKapalController::class, 'show'])->name("berita-acara.show");
         });
 
         //Keluhan Penghapusan PPKB
@@ -77,10 +86,14 @@ Route::middleware('auth')->group(function() {
             Route::get('berita-acara', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'index'])->name('berita-acara.index');
             Route::get('berita-acara/create', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'create'])->name('berita-acara.create');
             Route::post('berita-acara', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'store'])->name('berita-acara.store');
+            Route::post('berita-acara/approval/{id}', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'approval'])->name('berita-acara.approval');
 
-            Route::get('berita-acara/{id}', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'show'])->name("berita-acara.show");
             Route::get('berita-acara/edit/{id}', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'edit'])->name('berita-acara.edit');
+            Route::post('berita-acara/edit/{id}', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'update'])->name('berita-acara.update');
+            Route::get('berita-acara/{id}', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'show'])->name("berita-acara.show");
         });
+        
+        Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('report');
     });
     
 });

@@ -1,12 +1,7 @@
 @extends('layout.adminlayout')
 @section('title', 'Keluhan Nota Kapal')
-@section('header')
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page" style="color: white">Keluhan Nota Kapal</li>
-    </ol>
-@endsection
 @section('content')
-    <table class="table table-striped">
+    <table class="table table-striped datatable">
         <thead class="thead">
             <tr>
                 <th>Nama Kapal</th>
@@ -21,7 +16,7 @@
             @forelse ($notaKapals as $data)
                 <tr>
                     <th scope="row">{{ $data->namakapal }}</th>
-                    <td>{{ date('d-F-Y', strtotime($data->tanggal)) }}</td>
+                    <td>{{ $data->tanggal->format('d F Y') }}</td>
                     <td>{{ $data->deskripsi }}</td>
                     <td>{{ \App\Enum\Status::from($data->status)->label() }}</td>
                     <td>

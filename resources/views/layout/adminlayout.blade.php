@@ -17,7 +17,7 @@
             @include('layout.partials.side')
         </section>
         <section class="body-admin">
-            <div class="container my-5">
+            <div class="container my-5 px-5">
                 @yield('content')
             </div>
         </section>

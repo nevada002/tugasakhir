@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enum\Status;
-use App\Models\BeritaAcaraNotaKapal;
 use App\Models\Hasil;
 use App\Models\NotaKapal;
-use App\Models\StatusBeritaAcara;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,28 +19,26 @@ class KeluhanNotaKapalController extends Controller
 
     public function process(Request $request, $id)
     {
-        $notaKapal = NotaKapal::find($id);
-        $hasil = Hasil::where('no_keluhan', $notaKapal->no_keluhan)->first();
+        $nota = NotaKapal::findOrFail($id);
+        $hasil = Hasil::where('no_keluhan', $nota->no_keluhan)->first();
         
-        if (!$notaKapal || !$hasil) {
+        if (!$nota || !$hasil) {
             return response()->json([
                 'message' => 'Request tidak valid'
             ], 400);
         }
 
-        // return $notaKapal->berita_acara;
-
         if (
-            !$notaKapal->berita_acara || 
-            !$notaKapal->berita_acara->penanda_tangan_time || 
-            !$notaKapal->berita_acara->pihak_verifikasi_time
+            !$nota->berita_acara || 
+            !$nota->berita_acara->penanda_tangan_time || 
+            !$nota->berita_acara->pihak_verifikasi_time
         ) {
             return response()->json([
                 'message' => 'Penanda tangan atau pihak verifikasi belum malakukan approval!'
             ], 400);
         }
 
-        $notaKapal->update([
+        $nota->update([
             'status' => $request->status
         ]);
 

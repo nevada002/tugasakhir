@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class NotaSampah extends Model
 {
     use HasFactory;
+
     protected $table = 'nota_sampahs';
+
     protected $fillable = [
+        'no_keluhan',
+        'no_berita_acara',
         'namakapal',
         'tanggal',
         'nomornota',
@@ -19,18 +23,46 @@ class NotaSampah extends Model
         'created_by',
     ];
 
+    public $casts = [
+        'tanggal' => 'date',
+    ];
+
     public static function boot()
     {
         parent::boot();
 
         static::creating(function($data) {
+            list($no_keluhan, $no_berita_acara) = static::generateNomor();
+
+            $data->no_keluhan = $no_keluhan;
+            $data->no_berita_acara = $no_berita_acara;
             $data->created_by = auth()->id();
             return $data;
         });
+
+        static::created(function($data) {
+            Hasil::create([
+                'no_keluhan' => $data->no_keluhan,
+                'no_berita_acara' => '-',
+                'jenis_berita_acara' => 'Berita Acara Nota Sampah Kapal',
+                'status' => $data->status,
+                'user_id' => $data->created_by,
+            ]);
+        });
     }
-    
-    public function getDataNoSa()
+
+    public static function generateNomor()
     {
-        return $this->count();
+        $count = self::whereDate('created_at', now()->format('Y-m-d'))->count() + 1;
+
+        return [
+            'KEL-NS/' . date('Ymd') . '/' . str_pad($count, 4, '0', STR_PAD_LEFT), // nomor nota/keluhan
+            date('dny') . '/BA-KNS/' . $count . '/' . date('Y'), // nomor berita acara
+        ];
+    }
+
+    public function berita_acara()
+    {
+        return $this->hasOne(BeritaAcaraNotaSampah::class, 'nota_id', 'id');
     }
 }

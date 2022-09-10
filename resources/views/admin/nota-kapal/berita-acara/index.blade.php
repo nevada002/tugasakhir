@@ -1,22 +1,18 @@
 @extends('layout.adminlayout')
 @section('title', 'Surat Berita Acara Nota Kapal')
-@section('header')
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page" style="color: #fff">Surat Berita Acara Nota Kapal</li>
-    </ol>
-@endsection
+
 @section('content')
+    @if (session()->has('success'))
+        <div class="alert alert-success">{{ session()->get('success') }}</div>
+    @endif
+    
     @if (auth()->user()->isCustomerService())
         <a href="{{ route('admin.nota-kapal.berita-acara.create') }}" class="btn btn-primary mb-3">
             Buat Surat
         </a>
     @endif
 
-    @if (session()->has('success'))
-        <div class="alert alert-success">{{ session()->get('success') }}</div>
-    @endif
-    
-    <table class="table table-striped">
+    <table class="table table-striped datatable">
         <thead>
             <tr>
                 <th>No</th>
@@ -34,14 +30,14 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($beritaAcaras as $data)
+            @foreach ($beritaAcaras as $data)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $data->nomor_surat }}</td>
-                    <td>{{ $data->tanggal }}</td>
+                    <td>{{ $data->tanggal->format('d F Y') }}</td>
                     <td>{{ $data->nama_perusahaan }}</td>
                     <td>{{ $data->no_surat_perusahaan }}</td>
-                    <td>{{ $data->tanggal_surat }}</td>
+                    <td>{{ $data->tanggal_surat->format('d F Y') }}</td>
                     <td>{{ $data->perihal }}</td>
                     {{-- <td>{{ $data->nomor_nota_kapal }}</td> --}}
                     <td>{{ $data->keterangan }}</td>
@@ -60,11 +56,12 @@
                             -
                         @endif
                     </td>
-                    <td class="d-flex justify-content-space-between">
+                    <td class="justify-content-space-between w-100">
+                        <a href="{{ route('admin.nota-kapal.berita-acara.show', ['id' => $data->id]) }}" class="btn btn-primary">
+                            <i class="bi bi-eye"></i>
+                        </a>
+
                         @if (auth()->user()->isCustomerService())
-                            <a href="{{ route('admin.nota-kapal.berita-acara.show', ['id' => $data->id]) }}" class="btn btn-primary">
-                                <i class="bi bi-eye"></i>
-                            </a>
                             <a href="{{ route('admin.nota-kapal.berita-acara.edit', ['id' => $data->id]) }}" class="btn btn-success ms-1">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
@@ -98,8 +95,7 @@
                         </button>
                     </td>
                 </tr>
-            @empty
-            @endforelse
+            @endforeach
         </tbody>
     </table>
 
@@ -158,7 +154,6 @@
         </div>
     </div>
 @endsection
-
 
 @push('scripts')
     <script>

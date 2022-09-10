@@ -23,6 +23,10 @@ class NotaKapal extends Model
         'created_by',
     ];
 
+    public $casts = [
+        'tanggal' => 'date',
+    ];
+
     public static function boot()
     {
         parent::boot();
