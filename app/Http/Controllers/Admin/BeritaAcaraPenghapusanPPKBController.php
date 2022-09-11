@@ -17,12 +17,12 @@ class BeritaAcaraPenghapusanPPKBController extends Controller
     public function index()
     {
         $beritaAcaras = BeritaAcaraNotaPPKB::query();
-        $beritaAcaras->whereHas('nota', function($q) {
+        $beritaAcaras->whereHas('nota', function ($q) {
             $q->where('status', Status::PROCESS);
         });
 
         if (!auth()->user()->isCustomerService()) {
-            $beritaAcaras->where(function($q) {
+            $beritaAcaras->where(function ($q) {
                 $q->where('penanda_tangan_id', auth()->id());
                 $q->orWhere('pihak_verifikasi_id', auth()->id());
             });
@@ -87,7 +87,7 @@ class BeritaAcaraPenghapusanPPKBController extends Controller
             ->route('admin.penghapusan-ppkb.berita-acara.index')
             ->with('success', 'Data berhasil ditambahkan');
     }
-    
+
     public function approval(Request $request, $id)
     {
         $data = [];
@@ -100,7 +100,7 @@ class BeritaAcaraPenghapusanPPKBController extends Controller
         BeritaAcaraNotaPPKB::findOrFail($id)->update($data);
 
         return response()->json([
-            'message' => 'Sukses' 
+            'message' => 'Sukses'
         ]);
     }
 

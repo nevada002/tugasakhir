@@ -21,7 +21,7 @@ class KeluhanNotaSampahKapalController extends Controller
     {
         $nota = NotaSampah::findOrFail($id);
         $hasil = Hasil::where('no_keluhan', $nota->no_keluhan)->first();
-        
+
         if (!$nota || !$hasil) {
             return response()->json([
                 'message' => 'Request tidak valid'
@@ -29,8 +29,8 @@ class KeluhanNotaSampahKapalController extends Controller
         }
 
         if (
-            !$nota->berita_acara || 
-            !$nota->berita_acara->penanda_tangan_time || 
+            !$nota->berita_acara ||
+            !$nota->berita_acara->penanda_tangan_time ||
             !$nota->berita_acara->pihak_verifikasi_time
         ) {
             return response()->json([
@@ -47,7 +47,7 @@ class KeluhanNotaSampahKapalController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Sukses' 
+            'message' => 'Sukses'
         ]);
     }
 }

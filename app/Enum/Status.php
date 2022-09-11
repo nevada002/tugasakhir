@@ -10,26 +10,24 @@ enum Status: int
 
     public function label(): string
     {
-        return match($this) 
-        {
-            self::PROCESS => 'Diproses',   
-            self::REJECTED => 'Ditolak',   
-            self::APPROVED => 'Diterima',   
+        return match ($this) {
+            self::PROCESS => 'Diproses',
+            self::REJECTED => 'Ditolak',
+            self::APPROVED => 'Diterima',
         };
     }
 
     public function action(): string
     {
-        return match($this) 
-        {
-            self::PROCESS => 'Proses',   
-            self::REJECTED => 'Tolak',   
-            self::APPROVED => 'Terima',   
+        return match ($this) {
+            self::PROCESS => 'Proses',
+            self::REJECTED => 'Tolak',
+            self::APPROVED => 'Terima',
         };
     }
 
     public static function values(): array
     {
-        return array_map(fn(Status $s) => $s->value, self::cases());
+        return array_map(fn (Status $s) => $s->value, self::cases());
     }
 }

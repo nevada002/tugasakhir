@@ -10,7 +10,7 @@ class BeritaAcaraNotaPPKB extends Model
     use HasFactory;
 
     protected $table = 'berita_acara_nota_ppkbs';
-    
+
     protected $fillable = [
         'nota_id',
         'nomor_surat',
@@ -37,7 +37,7 @@ class BeritaAcaraNotaPPKB extends Model
     public $casts = [
         'tanggal' => 'date',
     ];
-    
+
     public function nota()
     {
         return $this->belongsTo(NotaPPKB::class, 'nota_id', 'id');

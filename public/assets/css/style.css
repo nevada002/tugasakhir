@@ -52,7 +52,7 @@
     width: 100%;
 }
 
-.footer-admin{
+.footer-admin {
     grid-area: foot;
     height: 111px;
     width: 100%;
@@ -64,8 +64,7 @@
     grid-template-areas:
         "logo nav"
         "side body"
-        "foot foot"
-        ;
+        "foot foot";
 }
 
 .grid-admin > section {

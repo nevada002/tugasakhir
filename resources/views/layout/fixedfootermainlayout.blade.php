@@ -19,7 +19,7 @@
             @include('layout.partials.fixedfooter')
         </section>
     </div>
-    
+
     @stack('scripts')
 </body>
 

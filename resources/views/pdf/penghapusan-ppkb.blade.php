@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BERITA ACARA PENGHAPUSAN PPKB</title>
 </head>
+
 <body>
     <h3 style="text-align: center; margin-bottom: 0;">BERITA ACARA PENGHAPUSAN PPKB</h3>
     <p style="text-align: center; margin-top: 4px;">Nomor: {{ $hasil->no_berita_acara }}</p>
-    <p>Pada hari ini {{ $created_at->isoFormat('dddd') }} tanggal {{ $created_at->isoFormat('D') }} bulan {{ $created_at->isoFormat('M') }} tahun {{ $created_at->isoFormat('YYYY') }}, yang bertanda tangan dibawah ini kami, dengan ini menyatakan:</p>
+    <p>Pada hari ini {{ $created_at->isoFormat('dddd') }} tanggal {{ $created_at->isoFormat('D') }} bulan
+        {{ $created_at->isoFormat('M') }} tahun {{ $created_at->isoFormat('YYYY') }}, yang bertanda tangan dibawah ini
+        kami, dengan ini menyatakan:</p>
     <div style="margin-left: 20px;">
         <table>
             <tbody>
@@ -56,7 +60,8 @@
             </tbody>
         </table>
     </div>
-    <p>Demikian Berita Acara ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya dan apabila dikemudian hari terdapat kekeliruan dapat diperbaiki sebagaimana harusnya.</p>
+    <p>Demikian Berita Acara ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya dan apabila dikemudian
+        hari terdapat kekeliruan dapat diperbaiki sebagaimana harusnya.</p>
     <br>
     <br>
     <table style="width: 100%">
@@ -85,4 +90,5 @@
         </tbody>
     </table>
 </body>
+
 </html>

@@ -16,12 +16,12 @@ class BeritaAcaraNotaSampahKapalController extends Controller
     public function index()
     {
         $beritaAcaras = BeritaAcaraNotaSampah::query();
-        $beritaAcaras->whereHas('nota', function($q) {
+        $beritaAcaras->whereHas('nota', function ($q) {
             $q->where('status', Status::PROCESS);
         });
 
         if (!auth()->user()->isCustomerService()) {
-            $beritaAcaras->where(function($q) {
+            $beritaAcaras->where(function ($q) {
                 $q->where('penanda_tangan_id', auth()->id());
                 $q->orWhere('pihak_verifikasi_id', auth()->id());
             });
@@ -60,11 +60,11 @@ class BeritaAcaraNotaSampahKapalController extends Controller
         $file = $request->file('lampiranpendukung');
         $fileName = $file->getClientOriginalName();
         $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
-        
+
         $validated['lampiranpendukung'] = $fileName;
         $validated['nomor_surat'] = $nota->no_berita_acara;
         $beritaAcara = BeritaAcaraNotaSampah::create($validated);
-     
+
         Hasil::query()
             ->where('no_keluhan', $nota->no_keluhan)
             ->first()
@@ -91,7 +91,7 @@ class BeritaAcaraNotaSampahKapalController extends Controller
         BeritaAcaraNotaSampah::findOrFail($id)->update($data);
 
         return response()->json([
-            'message' => 'Sukses' 
+            'message' => 'Sukses'
         ]);
     }
 

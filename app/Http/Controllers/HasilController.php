@@ -28,7 +28,7 @@ class HasilController extends Controller
             ->whereHas('berita_acara')
             // ->where('status', Status::APPROVED)
             ->findOrFail($id);
-            
+
         $filename = [
             'App\Models\BeritaAcaraNotaKapal' => 'pdf.nota-kapal',
             'App\Models\BeritaAcaraNotaSampah' => 'pdf.nota-sampah-kapal',

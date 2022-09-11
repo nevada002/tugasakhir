@@ -4,7 +4,7 @@
     @if ($errors->any())
         <div class="alert alert-danger">{{ $errors->first() }}</div>
     @endif
-    
+
     <a href="{{ route('admin.penghapusan-ppkb.berita-acara.index') }}" class="btn btn-danger mb-3">
         Kembali
     </a>
@@ -34,17 +34,20 @@
             </div>
             <label class="col-sm-2 col-form-label" for="nama_kapal">Nama Kapal</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="nama_kapal" name="nama_kapal" placeholder="Nama Kapal" required>
+                <input type="text" class="form-control" id="nama_kapal" name="nama_kapal" placeholder="Nama Kapal"
+                    required>
             </div>
         </div>
         <div class="form-group mb-3 row">
             <label class="col-sm-2 col-form-label" for="noppkb">No.PPKB / Ke</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="noppkb" name="noppkb" placeholder="No.PPKB / Ke" required>
+                <input type="text" class="form-control" id="noppkb" name="noppkb" placeholder="No.PPKB / Ke"
+                    required>
             </div>
             <label class="col-sm-2 col-form-label" for="service_code">Service Code</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="service_code" name="service_code" placeholder="Service Code" required>
+                <input type="text" class="form-control" id="service_code" name="service_code" placeholder="Service Code"
+                    required>
             </div>
         </div>
         <div class="form-group mb-3 row">
@@ -75,8 +78,8 @@
             </div>
             <label class="col-sm-2 col-form-label" for="dibuatoleh">Di Buat Oleh</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="dibuatoleh" name="dibuatoleh"
-                    placeholder="Di Buat Oleh" required>
+                <input type="text" class="form-control" id="dibuatoleh" name="dibuatoleh" placeholder="Di Buat Oleh"
+                    required>
             </div>
         </div>
         <div class="form-group mb-3 row">
@@ -102,8 +105,8 @@
         <div class="form-group mb-3 row">
             <label class="col-sm-2 col-form-label" for="alasan">Alasan Penghapusan</label>
             <div class="col-sm-10">
-                <textarea type="text" class="form-control" id="alasan" name="alasan" placeholder="Alasan Penghapusan required"
-                    rows="2"></textarea>
+                <textarea type="text" class="form-control" id="alasan" name="alasan" placeholder="Alasan Penghapusan"
+                    required rows="2"></textarea>
             </div>
         </div>
         <div class="row justify-content-end">

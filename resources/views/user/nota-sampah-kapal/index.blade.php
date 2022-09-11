@@ -38,7 +38,7 @@
                         <input type="text" name="nomornota" class="form-control" value="{{ old('nomornota') }}" required>
                     </div>
                 </div>
-                
+
                 <div class="mb-3 row">
                     <label for="deskripsi" class="col-12 col-md-3 col-form-label fw-bold">Deskripsi</label>
                     <div class="col-12 col-md-9">

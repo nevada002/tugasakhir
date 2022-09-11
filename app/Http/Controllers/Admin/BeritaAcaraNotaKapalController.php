@@ -16,12 +16,12 @@ class BeritaAcaraNotaKapalController extends Controller
     public function index()
     {
         $beritaAcaras = BeritaAcaraNotaKapal::query();
-        $beritaAcaras->whereHas('nota', function($q) {
+        $beritaAcaras->whereHas('nota', function ($q) {
             $q->where('status', Status::PROCESS);
         });
 
         if (!auth()->user()->isCustomerService()) {
-            $beritaAcaras->where(function($q) {
+            $beritaAcaras->where(function ($q) {
                 $q->where('penanda_tangan_id', auth()->id());
                 $q->orWhere('pihak_verifikasi_id', auth()->id());
             });
@@ -106,7 +106,7 @@ class BeritaAcaraNotaKapalController extends Controller
         BeritaAcaraNotaKapal::findOrFail($id)->update($data);
 
         return response()->json([
-            'message' => 'Sukses' 
+            'message' => 'Sukses'
         ]);
     }
 

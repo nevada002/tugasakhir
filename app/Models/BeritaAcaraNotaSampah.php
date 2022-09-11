@@ -10,7 +10,7 @@ class BeritaAcaraNotaSampah extends Model
     use HasFactory;
 
     protected $table = 'berita_acara_nota_sampahs';
-    
+
     protected $fillable = [
         'nota_id',
         'nomor_surat',

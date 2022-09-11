@@ -4,7 +4,7 @@
     @if ($errors->any())
         <div class="alert alert-danger">{{ $errors->first() }}</div>
     @endif
-    
+
     <a href="{{ route('admin.nota-sampah-kapal.berita-acara.index') }}" class="btn btn-danger mb-3">
         Kembali
     </a>
@@ -34,7 +34,8 @@
             </div>
             <label class="col-sm-2 col-form-label" for="dibuatoleh">Di Buat Oleh</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="dibuatoleh" name="dibuatoleh" placeholder="Di Buat Oleh" required>
+                <input type="text" class="form-control" id="dibuatoleh" name="dibuatoleh" placeholder="Di Buat Oleh"
+                    required>
             </div>
         </div>
 

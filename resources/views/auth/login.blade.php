@@ -14,18 +14,21 @@
                             @csrf
                             <div class="row">
                                 <div class="col mt-5 mb-3 ">
-                                    <input name="email" type="email" class="form-control" id="email" placeholder="E-mail" value="{{ old('email') }}" required>
+                                    <input name="email" type="email" class="form-control" id="email"
+                                        placeholder="E-mail" value="{{ old('email') }}" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
-                                    <input name="password" type="password" class="form-control" id="password" placeholder="Kata Sandi" required>
+                                    <input name="password" type="password" class="form-control" id="password"
+                                        placeholder="Kata Sandi" required>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col">
                                     <div class="d-flex justify-content-between">
-                                        <div class="my-auto">Belum memiliki akun? <a href="{{ route('register') }}">Daftar</a></div>
+                                        <div class="my-auto">Belum memiliki akun? <a
+                                                href="{{ route('register') }}">Daftar</a></div>
                                         <button type="submit" class="btn btn-primary">Masuk</button>
                                     </div>
                                 </div>

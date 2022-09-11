@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hasil extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'berita_acara_type',
         'berita_acara_id',

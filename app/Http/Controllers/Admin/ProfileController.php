@@ -26,12 +26,12 @@ class ProfileController extends Controller
         ]);
 
         if (
-            $request->old_password && 
+            $request->old_password &&
             !Hash::check($request->old_password, auth()->user()->password)
         ) {
             return redirect()->back()->withErrors('Kata sandi lama tidak sesuai.');
         }
-        
+
         $data = $request->except(['old_password', 'new_password', 'new_password_confirmation']);
         if ($request->new_password) {
             $data['password'] = Hash::make($request->new_password);

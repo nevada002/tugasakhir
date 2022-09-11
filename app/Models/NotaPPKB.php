@@ -28,7 +28,7 @@ class NotaPPKB extends Model
     {
         parent::boot();
 
-        static::creating(function($data) {
+        static::creating(function ($data) {
             list($no_keluhan, $no_berita_acara) = static::generateNomor();
 
             $data->no_keluhan = $no_keluhan;
@@ -37,7 +37,7 @@ class NotaPPKB extends Model
             return $data;
         });
 
-        static::created(function($data) {
+        static::created(function ($data) {
             Hasil::create([
                 'no_keluhan' => $data->no_keluhan,
                 'no_berita_acara' => '-',

@@ -18,21 +18,21 @@ use Illuminate\Support\Facades\Auth;
 Route::view('/', 'home');
 Auth::routes(['reset' => false, 'verify' => true]);
 
-Route::middleware('auth', 'verified')->group(function() {
+Route::middleware('auth', 'verified')->group(function () {
     //User
     Route::view('/home', 'home')->name('home');
 
-    Route::prefix('keluhan')->name('keluhan.')->group(function() {
+    Route::prefix('keluhan')->name('keluhan.')->group(function () {
         Route::get('nota-kapal', [\App\Http\Controllers\KeluhanNotaKapalController::class, 'create'])->name("nota-kapal.index");
         Route::post('nota-kapal/store', [\App\Http\Controllers\KeluhanNotaKapalController::class, 'store'])->name("nota-kapal.store");
-        
+
         Route::get('nota-sampah-kapal', [\App\Http\Controllers\KeluhanNotaSampahKapalController::class, 'create'])->name("nota-sampah-kapal.index");
         Route::post('nota-sampah-kapal/store', [\App\Http\Controllers\KeluhanNotaSampahKapalController::class, 'store'])->name("nota-sampah-kapal.store");
-        
+
         Route::get('pengahapusan-ppkb', [\App\Http\Controllers\KeluhanPenghapusanPPKBController::class, 'create'])->name("penghapusan-ppkb.index");
         Route::post('pengahapusan-ppkb/store', [\App\Http\Controllers\KeluhanPenghapusanPPKBController::class, 'store'])->name("penghapusan-ppkb.store");
     });
-    
+
     Route::get('hasil', [\App\Http\Controllers\HasilController::class, 'index']);
     Route::get('hasil/{id}/pdf', [\App\Http\Controllers\HasilController::class, 'pdf'])->name('hasil.pdf');
 
@@ -40,13 +40,13 @@ Route::middleware('auth', 'verified')->group(function() {
     Route::post('edit-profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
     //Admin
-    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::get('edit-profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('edit-profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
-        
+
         //Nota Kapal
-        Route::prefix('nota-kapal')->name('nota-kapal.')->group(function() {
+        Route::prefix('nota-kapal')->name('nota-kapal.')->group(function () {
             Route::get('keluhan', [\App\Http\Controllers\Admin\KeluhanNotaKapalController::class, 'index'])->name('keluhan.index');
             Route::post('keluhan/{id}', [\App\Http\Controllers\Admin\KeluhanNotaKapalController::class, 'process'])->name('keluhan.process');
             // Route::get('downloadnotakapal/{id}', [\App\Http\Controllers\Admin\KeluhanNotaKapalController::class, 'download'])->name('downloadnotakapal');
@@ -62,7 +62,7 @@ Route::middleware('auth', 'verified')->group(function() {
         });
 
         //Nota Sampah Kapal
-        Route::prefix('nota-sampah-kapal')->name('nota-sampah-kapal.')->group(function() {
+        Route::prefix('nota-sampah-kapal')->name('nota-sampah-kapal.')->group(function () {
             Route::get('keluhan', [\App\Http\Controllers\Admin\KeluhanNotaSampahKapalController::class, 'index'])->name('keluhan.index');
             Route::post('keluhan/{id}', [\App\Http\Controllers\Admin\KeluhanNotaSampahKapalController::class, 'process'])->name('keluhan.process');
             // Route::get('downloadnotakapal/{id}', [\App\Http\Controllers\Admin\KeluhanNotaSampahKapalController::class, 'download'])->name('downloadnotakapal');
@@ -78,7 +78,7 @@ Route::middleware('auth', 'verified')->group(function() {
         });
 
         //Keluhan Penghapusan PPKB
-        Route::prefix('penghapusan-ppkb')->name('penghapusan-ppkb.')->group(function() {
+        Route::prefix('penghapusan-ppkb')->name('penghapusan-ppkb.')->group(function () {
             Route::get('keluhan', [\App\Http\Controllers\Admin\KeluhanPenghapusanPPKBController::class, 'index'])->name('keluhan.index');
             Route::post('keluhan/{id}', [\App\Http\Controllers\Admin\KeluhanPenghapusanPPKBController::class, 'process'])->name('keluhan.process');
             // Route::get('downloadnotakapal/{id}', [\App\Http\Controllers\Admin\KeluhanPenghapusanPPKBController::class, 'download'])->name('downloadnotakapal');
@@ -92,9 +92,7 @@ Route::middleware('auth', 'verified')->group(function() {
             Route::post('berita-acara/edit/{id}', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'update'])->name('berita-acara.update');
             Route::get('berita-acara/{id}', [\App\Http\Controllers\Admin\BeritaAcaraPenghapusanPPKBController::class, 'show'])->name("berita-acara.show");
         });
-        
+
         Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('report');
     });
-    
 });
-

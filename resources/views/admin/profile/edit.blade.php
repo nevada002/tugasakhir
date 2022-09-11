@@ -3,9 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            
+
             @if ($errors->any())
-                <div class="alert alert-danger" role="alert">{{$errors->first()}}</div>
+                <div class="alert alert-danger" role="alert">{{ $errors->first() }}</div>
             @endif
 
             @if (session()->has('success'))
@@ -17,7 +17,8 @@
                 <div class="form-group mb-3 row">
                     <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-9">
-                        <input name="name" type="text" class="form-control" placeholder="Nama Lengkap" value="{{ auth()->user()->name }}" required>
+                        <input name="name" type="text" class="form-control" placeholder="Nama Lengkap"
+                            value="{{ auth()->user()->name }}" required>
                     </div>
                 </div>
                 <div class="form-group mb-3 row">
@@ -30,7 +31,8 @@
                     <div class="form-group mb-5 row">
                         <label class="col-sm-3 col-form-label">Alamat</label>
                         <div class="col-sm-9">
-                            <input name="alamat" type="text" class="form-control" placeholder="Alamat" value="{{ auth()->user()->alamat }}" required>
+                            <input name="alamat" type="text" class="form-control" placeholder="Alamat"
+                                value="{{ auth()->user()->alamat }}" required>
                         </div>
                     </div>
                 @else
@@ -41,12 +43,7 @@
                                 <option selected disabled>-- Pilih --</option>
 
                                 @foreach (\App\Enum\Jabatan::cases() as $jabatan)
-                                    <option 
-                                        value="{{ $jabatan->value }}" 
-                                        @if(auth()->user()->jabatan == $jabatan->value) 
-                                        selected
-                                        @endif
-                                    >
+                                    <option value="{{ $jabatan->value }}" @if (auth()->user()->jabatan == $jabatan->value) selected @endif>
                                         {{ $jabatan->label() }}
                                     </option>
                                 @endforeach
@@ -54,7 +51,7 @@
                         </div>
                     </div>
                 @endif
-                
+
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label"></label>
                     <div class="col-sm-9">
@@ -78,7 +75,8 @@
                 <div class="form-group mb-3 row">
                     <label class="col-sm-3 col-form-label">Ulangi Kata Sandi Baru</label>
                     <div class="col-sm-9">
-                        <input name="new_password_confirmation" type="password" class="form-control" placeholder="Ulangi Kata Sandi Baru">
+                        <input name="new_password_confirmation" type="password" class="form-control"
+                            placeholder="Ulangi Kata Sandi Baru">
                     </div>
                 </div>
 
