@@ -8,6 +8,7 @@
             </li>
             <hr>
 
+            {{-- Berita Acara Nota Kapal --}}
             <li class="py-3">
                 <div class="row">
                     <div class="col-10 pe-0">
@@ -27,17 +28,15 @@
                 <hr>
                 <div class="card card-body border-0 pt-0" style="background: transparent">
                     @if (auth()->user()->isCustomerService())
-                        <li>
-                            <a href="{{ route('admin.nota-kapal.keluhan.index') }}"
-                                style="color:#00225A; text-decoration: none">
-                                Keluhan Berita Acara Nota Kapal
-                            </a>
-                        </li>
-                        <hr>
+                    <li>
+                        <a href="{{ route('admin.nota-kapal.keluhan.index') }}" style="color:#00225A; text-decoration: none">
+                            Keluhan Berita Acara Nota Kapal
+                        </a>
+                    </li>
+                    <hr>
                     @endif
                     <li>
-                        <a href="{{ route('admin.nota-kapal.berita-acara.index') }}"
-                            style="color:#00225A; text-decoration: none">
+                        <a href="{{ route('admin.nota-kapal.berita-acara.index') }}" style="color:#00225A; text-decoration: none">
                             Membuat Berita Acara Nota Kapal
                         </a>
                     </li>
@@ -45,6 +44,7 @@
             </div>
             <hr>
 
+            {{-- Berita Acara Nota Sampah Kapal --}}
             <li class="py-3">
                 <div class="row">
                     <div class="col-10 pe-0">
@@ -64,17 +64,15 @@
                 <hr>
                 <div class="card card-body border-0 pt-0" style="background: transparent">
                     @if (auth()->user()->isCustomerService())
-                        <li>
-                            <a href="{{ route('admin.nota-sampah-kapal.keluhan.index') }}"
-                                style="color:#00225A; text-decoration: none">
-                                Keluhan Berita Acara Nota Sampah Kapal
-                            </a>
-                        </li>
-                        <hr>
+                    <li>
+                        <a href="{{ route('admin.nota-sampah-kapal.keluhan.index') }}" style="color:#00225A; text-decoration: none">
+                            Keluhan Berita Acara Nota Sampah Kapal
+                        </a>
+                    </li>
+                    <hr>
                     @endif
                     <li>
-                        <a href="{{ route('admin.nota-sampah-kapal.berita-acara.index') }}"
-                            style="color:#00225A; text-decoration: none">
+                        <a href="{{ route('admin.nota-sampah-kapal.berita-acara.index') }}" style="color:#00225A; text-decoration: none">
                             Membuat Berita Acara Nota Sampah Kapal
                         </a>
                     </li>
@@ -82,6 +80,7 @@
             </div>
             <hr>
 
+            {{-- Berita Acara Penghapusan PPKB --}}
             </li>
             <li class="py-3">
                 <div class="row">
@@ -102,17 +101,15 @@
                 <hr>
                 <div class="card card-body border-0 pt-0" style="background: transparent">
                     @if (auth()->user()->isCustomerService())
-                        <li>
-                            <a href="{{ route('admin.penghapusan-ppkb.keluhan.index') }}"
-                                style="color:#00225A; text-decoration: none">
-                                Keluhan Berita Acara Pengahapusan PPKB
-                            </a>
-                        </li>
-                        <hr>
+                    <li>
+                        <a href="{{ route('admin.penghapusan-ppkb.keluhan.index') }}" style="color:#00225A; text-decoration: none">
+                            Keluhan Berita Acara Pengahapusan PPKB
+                        </a>
+                    </li>
+                    <hr>
                     @endif
                     <li>
-                        <a href="{{ route('admin.penghapusan-ppkb.berita-acara.index') }}"
-                            style="color:#00225A; text-decoration: none">
+                        <a href="{{ route('admin.penghapusan-ppkb.berita-acara.index') }}" style="color:#00225A; text-decoration: none">
                             Membuat Berita Acara Penghapusan PPKB
                         </a>
                     </li>

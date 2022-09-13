@@ -1,4 +1,5 @@
 <div class="container">
+    <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light" style="display: inline-block; float: none;">
         <div class="container">
             <a class="navbar-brand" href="/">
@@ -16,40 +17,38 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Keluhan
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background: #0475BD;">
-                            <li><a class="dropdown-item text-light" href="{{ route('keluhan.nota-kapal.index') }}">Form
-                                    Keluhan Nota Kapal</a></li>
-                            <li><a class="dropdown-item text-light"
-                                    href="{{ route('keluhan.nota-sampah-kapal.index') }}">Form Keluhan Nota Sampah
-                                    Kapal</a></li>
-                            <li><a class="dropdown-item text-light"
-                                    href="{{ route('keluhan.penghapusan-ppkb.index') }}">Form Keluhan Penghapusan
-                                    PPKB</a></li>
-                        </ul>
-                    </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Keluhan
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background: #0475BD;">
+                                <li><a class="dropdown-item text-light" href="{{ route('keluhan.nota-kapal.index') }}">Form Keluhan Nota Kapal</a></li>
+                                <li><a class="dropdown-item text-light" href="{{ route('keluhan.nota-sampah-kapal.index') }}">Form Keluhan Nota Sampah Kapal</a></li>
+                                <li><a class="dropdown-item text-light" href="{{ route('keluhan.penghapusan-ppkb.index') }}">Form Keluhan Penghapusan PPKB</a></li>
+                            </ul>
+                        </li>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/hasil">Hasil</a>
                     </li>
+                    
+                    
                 </ul>
+
+                {{-- <div class="navbar-nav me-auto"></div> --}}
+
             </div>
             <div class="navbar-nav" style="margin-left: 8em;">
                 @if (auth()->check())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarProfile" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ auth()->user()->name }}
+                            Selamat Datang, {{ auth()->user()->name }}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarProfile"
-                            style="background: #0475BD;">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarProfile" style="background: #0475BD;">
                             <li>
-                                <a class="dropdown-item text-light text-end" href="{{ route('profile.edit') }}">Edit
-                                    Profil</a>
+                                <a class="dropdown-item text-light text-end" href="{{ route('profile.edit') }}">Edit Profil</a>
                             </li>
                             <li>
                                 <a class="dropdown-item text-light text-end" href="#" id="logout">Logout</a>

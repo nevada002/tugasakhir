@@ -1,18 +1,25 @@
 <div class="footer">
     <footer class="text-center text-lg-start text-light" style="background-color: #0475BD;">
+        <!-- Section: Links  -->
         <div class="container text-center text-md-start mt-0">
+            <!-- Grid row -->
             <div class="row mt-0">
+                <!-- Grid column PT PELABUHAN -->
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-md-0 mb-0">
+                    <!-- Content -->
                     <p class="pt-2 mt-2">
                         <strong>BERLANGGANAN NEWSLETTER</strong>
                     </p>
+                    <!-- Email input -->
                     <div class="form-outline mb-4">
                         <input type="email" id="form5Example2" class="form-control"
                             placeholder="Masukan alamat email" />
                     </div>
                 </div>
 
+                <!-- Grid column NEWSLETTER-->
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-md-0 mb-0">
+                    <!-- Content -->
                     <h6 class="text-uppercase fw-bold mt-4 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-building" viewBox="0 0 16 16">
@@ -30,7 +37,10 @@
                         Jakarta Utara,14310</p>
                 </div>
 
+
+                <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-0">
+                    <!-- Links -->
                     <h6 class="text-uppercase fw-bold mt-4 mb-4">
                         <img src="https://img.icons8.com/dotty/20/ffffff/add-contact-to-company.png" /> Contact
                     </h6>
@@ -54,10 +64,13 @@
                 </div>
             </div>
         </div>
+        <!-- Section: Links  -->
 
+        <!-- Copyright -->
         <div class="text-center p-4" style="background-color: #0475BD;">
             Copyright ©
             <a class="text-reset fw-bold" href="https://pelindo.co.id/">Pelindo 2021</a>
         </div>
+        <!-- Copyright -->
     </footer>
 </div>

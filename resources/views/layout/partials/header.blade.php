@@ -2,9 +2,15 @@
     <h1 class="navbar-brand mb-0 text-light">@yield('title')</h1>
     <div class="navbar-nav me-auto"></div>
     <div class="navbar-nav dropdown-center">
-        <a id="navbarProfile" href="#" class="nav-link dropdown-toggle link-light" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            {{ auth()->user()->name }}
+        <a 
+            id="navbarProfile" 
+            href="#" 
+            class="nav-link dropdown-toggle link-light" 
+            role="button"
+            data-bs-toggle="dropdown" 
+            aria-expanded="false"
+        >
+            Selamat Datang, {{ auth()->user()->name }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarProfile">
             <li>
