@@ -202,7 +202,7 @@
           <h5 class="mt-3">Riwayat Persetujuan</h5>
           <h6 class="mt-4">Pihak Verifikasi</h6>
           <div class="row mb-3">
-              <label class="col-12 col-sm-4 col-form-label">Admin</label>
+              <label class="col-12 col-sm-4 col-form-label">Nama</label>
               <div class="col-12 col-sm-8">
                   <input type="text" class="form-control" id="namePv" disabled>
               </div>
@@ -222,7 +222,7 @@
 
           <h6 class="mt-3">Penanda Tangan</h6>
           <div class="row mb-3">
-              <label class="col-12 col-sm-4 col-form-label">Admin</label>
+              <label class="col-12 col-sm-4 col-form-label">Nama</label>
               <div class="col-12 col-sm-8">
                   <input type="text" class="form-control" id="namePt" disabled>
               </div>
