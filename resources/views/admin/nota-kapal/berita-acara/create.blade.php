@@ -4,7 +4,7 @@
     @if ($errors->any())
         <div class="alert alert-danger">{{ $errors->first() }}</div>
     @endif
-    
+
     <a href="{{ route('admin.nota-kapal.berita-acara.index') }}" class="btn btn-danger mb-3">
         Kembali
     </a>
@@ -12,10 +12,6 @@
     <form action="{{ route('admin.nota-kapal.berita-acara.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3 row">
-            {{-- <label class="col-sm-2 col-form-label" for="nomor_surat">Nomor Surat</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="nomor_surat" name="nomor_surat" placeholder="Nomor Surat">
-            </div> --}}
             <label class="col-sm-2 col-form-label" for="nomor_nota_kapal">Nomor Nota Kapal</label>
             <div class="col-sm-4">
                 <select class="form-select" name="nota_id" required>
@@ -54,23 +50,15 @@
             </div>
         </div>
         <div class="form-group mb-3 row">
-            {{-- <label class="col-sm-2 col-form-label" for="nomor_nota_kapal">Nomor Nota Kapal</label>
-            <div class="col-sm-4">
-                <select class="form-select" name="nota_id">
-                    <option name="">Pilih nota kapal</option>
-                    @foreach ($notaKapal as $datas)
-                        <option id="{{ $datas->id }}" value="{{ $datas->id }}" name="nota_id">
-                            {{ $datas->namakapal }}</option>
-                    @endforeach
-                </select>
-            </div> --}}
             <label class="col-sm-2 col-form-label" for="lampiranpendukung">Lampiran Pendukung</label>
             <div class="col-sm-4">
-                <input type="file" class="form-control" id="lampiranpendukung" name="lampiranpendukung" laceholder="Lampiran Pendukung" accept=".pdf" required>
+                <input type="file" class="form-control" id="lampiranpendukung" name="lampiranpendukung"
+                    laceholder="Lampiran Pendukung" accept=".pdf" required>
             </div>
             <label class="col-sm-2 col-form-label" for="dibuatoleh">Di Buat Oleh</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="dibuatoleh" name="dibuatoleh" placeholder="Di Buat Oleh" required>
+                <input type="text" class="form-control" id="dibuatoleh" name="dibuatoleh" placeholder="Di Buat Oleh"
+                    required>
             </div>
         </div>
         <div class="form-group mb-3 row">
@@ -100,15 +88,10 @@
             </div>
             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
             <div class="col-sm-4">
-                <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" rows="2" required></textarea>
+                <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"
+                    rows="2" required></textarea>
             </div>
         </div>
-        {{-- <div class="form-group mb-3 row">
-            <label class="col-sm-2 col-form-label" for="lampiranpendukung">Lampiran Pendukung</label>
-            <div class="col-sm-10">
-                <input type="file" class="form-control" id="lampiranpendukung" name="lampiranpendukung" laceholder="Lampiran Pendukung" accept=".pdf">
-            </div>
-        </div> --}}
         <div class="row justify-content-end">
             <div class="col-1">
                 <button class="btn btn-primary w-100" type="submit">Kirim</button>

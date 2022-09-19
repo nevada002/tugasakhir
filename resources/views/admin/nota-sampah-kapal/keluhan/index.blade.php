@@ -21,12 +21,9 @@
                     <td>{{ $data->deskripsi }}</td>
                     <td>
                         @if ($data->lampiranpendukung != null)
-                            <a 
-                                class="btn btn-secondary" 
-                                style="text-decoration: none"
+                            <a class="btn btn-secondary" style="text-decoration: none"
                                 href="{{ asset('storage/filelampiranpendukung/' . $data->lampiranpendukung) }}"
-                                target="_blank"
-                            >
+                                target="_blank">
                                 Download
                             </a>
                         @else
@@ -34,11 +31,7 @@
                         @endif
                     </td>
                     <td>
-                        <button 
-                            onclick="approval(this)" 
-                            class="btn btn-secondary ms-1"
-                            data-id="{{ $data->id }}"
-                        >
+                        <button onclick="approval(this)" class="btn btn-secondary ms-1" data-id="{{ $data->id }}">
                             <i class="bi bi-check-circle"></i>
                         </button>
                     </td>
@@ -52,7 +45,9 @@
 @push('scripts')
     <script>
         function approval(e) {
-            const { id } = $(e).data()
+            const {
+                id
+            } = $(e).data()
 
             Swal.fire({
                 title: 'Pilih Aksi',
@@ -89,7 +84,10 @@
 
             $.ajax({
                 url: "{{ url('admin/nota-sampah-kapal/keluhan/') }}/" + id,
-                data: { status, role },
+                data: {
+                    status,
+                    role
+                },
                 type: 'POST',
             }).done(res => {
                 Swal.fire('Sukses', '', 'success').then(res => {
@@ -101,4 +99,3 @@
         }
     </script>
 @endpush
-

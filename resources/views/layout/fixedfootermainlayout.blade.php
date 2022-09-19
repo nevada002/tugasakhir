@@ -19,7 +19,7 @@
             @include('layout.partials.fixedfooter')
         </section>
     </div>
-    
+
     <script src="{{ url('assets/js/custom.js') }}"></script>
     @stack('scripts')
 </body>

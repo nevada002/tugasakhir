@@ -4,18 +4,20 @@
     @if ($errors->any())
         <div class="alert alert-danger">{{ $errors->first() }}</div>
     @endif
-    
+
     <a href="{{ route('admin.nota-sampah-kapal.berita-acara.index') }}" class="btn btn-danger mb-3">
         Kembali
     </a>
 
-    <form action="{{ route('admin.nota-sampah-kapal.berita-acara.update', $beritaAcara->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.nota-sampah-kapal.berita-acara.update', $beritaAcara->id) }}" method="POST"
+        enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3 row">
             <label class="col-sm-2 col-form-label">Nomor Nota</label>
             <div class="col-sm-4">
                 <select class="form-select" name="nota_id" required>
-                    <option selected disabled value="{{ $beritaAcara->nota_id }}">{{ $beritaAcara->nota->namakapal }}</option>
+                    <option selected disabled value="{{ $beritaAcara->nota_id }}">{{ $beritaAcara->nota->namakapal }}
+                    </option>
                     @foreach ($nota as $n)
                         <option value="{{ $n->id }}">{{ $n->namakapal }}</option>
                     @endforeach
@@ -23,18 +25,21 @@
             </div>
             <label class="col-sm-2 col-form-label">Tanggal</label>
             <div class="col-sm-4">
-                <input type="date" class="form-control" value="{{ $beritaAcara->tanggal->format('Y-m-d') }}" name="tanggal" placeholder="Tanggal" required>
+                <input type="date" class="form-control" value="{{ $beritaAcara->tanggal->format('Y-m-d') }}"
+                    name="tanggal" placeholder="Tanggal" required>
             </div>
         </div>
         <div class="form-group mb-3 row">
             <label class="col-sm-2 col-form-label">Tanggal Nota</label>
             <div class="col-sm-4">
-                <input type="date" class="form-control" value="{{ $beritaAcara->tanggalnotasampahkapal->format('Y-m-d') }}" name="tanggalnotasampahkapal"
+                <input type="date" class="form-control"
+                    value="{{ $beritaAcara->tanggalnotasampahkapal->format('Y-m-d') }}" name="tanggalnotasampahkapal"
                     placeholder="tanggalnotasampahkapal" required>
             </div>
             <label class="col-sm-2 col-form-label">Di Buat Oleh</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" value="{{ $beritaAcara->dibuatoleh }}" name="dibuatoleh" placeholder="Di Buat Oleh" required>
+                <input type="text" class="form-control" value="{{ $beritaAcara->dibuatoleh }}" name="dibuatoleh"
+                    placeholder="Di Buat Oleh" required>
             </div>
         </div>
         <div class="form-group mb-3 row">
@@ -42,14 +47,9 @@
             <div class="col-sm-4">
                 <select class="form-select" name="penanda_tangan_id" required>
                     @foreach ($penandaTangan as $d)
-                    <option 
-                        value="{{ $d->id }}"
-                        @if ($beritaAcara->penanda_tangan_id == $d->id)
-                            selected
-                        @endif
-                    >
-                        {{ $d->name }}
-                    </option>
+                        <option value="{{ $d->id }}" @if ($beritaAcara->penanda_tangan_id == $d->id) selected @endif>
+                            {{ $d->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -57,12 +57,7 @@
             <div class="col-sm-4">
                 <select class="form-select" name="pihak_verifikasi_id" required>
                     @foreach ($pihakVerifikasi as $d)
-                        <option 
-                            value="{{ $d->id }}"
-                            @if ($beritaAcara->pihak_verifikasi_id == $d->id)
-                                selected
-                            @endif
-                        >
+                        <option value="{{ $d->id }}" @if ($beritaAcara->pihak_verifikasi_id == $d->id) selected @endif>
                             {{ $d->name }}
                         </option>
                     @endforeach
@@ -72,12 +67,13 @@
         <div class="form-group mb-3 row">
             <label class="col-sm-2 col-form-label" for="alasan">PIC</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="pic" placeholder="PIC" value="{{ $beritaAcara->pic }}">
+                <input type="text" class="form-control" name="pic" placeholder="PIC"
+                    value="{{ $beritaAcara->pic }}">
             </div>
             <label class="col-sm-2 col-form-label">Lampiran Pendukung</label>
             <div class="col-sm-4">
-                <input type="file" class="form-control" value="{{ $beritaAcara->lampiranpendukung }}" name="lampiranpendukung"
-                    placeholder="Lampiran Pendukung" accept=".pdf">
+                <input type="file" class="form-control" value="{{ $beritaAcara->lampiranpendukung }}"
+                    name="lampiranpendukung" placeholder="Lampiran Pendukung" accept=".pdf">
                 <div class="form-text">Kosongkan jika tidak ingin mengubah.</div>
             </div>
         </div>

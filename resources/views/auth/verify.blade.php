@@ -17,8 +17,8 @@
                             <form action="{{ route('verification.resend') }}" method="post">
                                 @csrf
                                 <p>
-                                    Klik 
-                                    <a href="javascript:;" onclick="this.parentNode.parentNode.submit()">di sini</a> 
+                                    Klik
+                                    <a href="javascript:;" onclick="this.parentNode.parentNode.submit()">di sini</a>
                                     untuk mengirimkan email verifikasi terbaru.
                                 </p>
                             </form>
