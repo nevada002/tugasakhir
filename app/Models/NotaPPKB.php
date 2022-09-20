@@ -28,7 +28,7 @@ class NotaPPKB extends Model
     {
         parent::boot();
 
-        static::creating(function ($data) {
+        static::creating(function($data) {
             list($no_keluhan, $no_berita_acara) = static::generateNomor();
 
             $data->no_keluhan = $no_keluhan;
@@ -37,8 +37,8 @@ class NotaPPKB extends Model
             return $data;
         });
 
-        static::created(function ($data) {
-            Hasil::create([
+        static::created(function($data) {
+            $data->hasil()->create([
                 'no_keluhan' => $data->no_keluhan,
                 'no_berita_acara' => '-',
                 'jenis_berita_acara' => 'Berita Acara Penghapusan PPKB',
@@ -61,5 +61,10 @@ class NotaPPKB extends Model
     public function berita_acara()
     {
         return $this->hasOne(BeritaAcaraNotaPPKB::class, 'nota_id', 'id');
+    }
+
+    public function hasil()
+    {
+        return $this->morphOne(Hasil::class, 'nota');
     }
 }

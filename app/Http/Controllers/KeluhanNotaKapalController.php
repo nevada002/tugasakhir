@@ -28,8 +28,8 @@ class KeluhanNotaKapalController extends Controller
 
         $data['lampiranpendukung'] = $fileName;
         $data['status'] = Status::PROCESS;
-        $notaKapal = NotaKapal::create($data);
+        $nota = NotaKapal::create($data);
 
-        return redirect()->back()->with('success', 'Berhasil membuat keluhan. Nomor: ' . $notaKapal->no_keluhan);
+        return redirect()->back()->with('success', 'Berhasil membuat keluhan. Nomor: ' . $nota->no_keluhan);
     }
 }

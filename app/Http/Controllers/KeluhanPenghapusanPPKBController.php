@@ -25,8 +25,8 @@ class KeluhanPenghapusanPPKBController extends Controller
         ]);
 
         $data['status'] = Status::PROCESS;
-        NotaPPKB::create($data);
-
-        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
+        $nota = NotaPPKB::create($data);
+        
+        return redirect()->back()->with('success', 'Berhasil membuat keluhan. Nomor: ' . $nota->no_keluhan);
     }
 }

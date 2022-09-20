@@ -16,12 +16,12 @@ class BeritaAcaraNotaKapalController extends Controller
     public function index()
     {
         $beritaAcaras = BeritaAcaraNotaKapal::query();
-        $beritaAcaras->whereHas('nota', function ($q) {
+        $beritaAcaras->whereHas('nota', function($q) {
             $q->where('status', Status::PROCESS);
         });
 
         if (!auth()->user()->isCustomerService()) {
-            $beritaAcaras->where(function ($q) {
+            $beritaAcaras->where(function($q) {
                 $q->where('penanda_tangan_id', auth()->id());
                 $q->orWhere('pihak_verifikasi_id', auth()->id());
             });
@@ -41,7 +41,7 @@ class BeritaAcaraNotaKapalController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             // 'nomor_surat' => 'required',
             'tanggal' => 'required',
             'nama_perusahaan' => 'required',
@@ -54,6 +54,7 @@ class BeritaAcaraNotaKapalController extends Controller
             'lampiranpendukung' => ['required', 'mimes:pdf', 'max:2048'],
             'penanda_tangan_id' => 'required',
             'pihak_verifikasi_id' => 'required',
+            'pic' => 'required',
         ]);
 
         $nota = NotaKapal::find($request->nota_id);
@@ -65,20 +66,9 @@ class BeritaAcaraNotaKapalController extends Controller
         $fileName = $file->getClientOriginalName();
         $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
 
-        $beritaAcara = BeritaAcaraNotaKapal::create([
-            'nota_id' => $request->nota_id,
-            'nomor_surat' => $nota->no_berita_acara,
-            'tanggal' => $request->tanggal,
-            'nama_perusahaan' => $request->nama_perusahaan,
-            'no_surat_perusahaan' => $request->no_surat_perusahaan,
-            'tanggal_surat' => $request->tanggal_surat,
-            'perihal' => $request->perihal,
-            'dibuatoleh' => $request->dibuatoleh,
-            'keterangan' => $request->keterangan,
-            'lampiranpendukung' => $fileName,
-            'penanda_tangan_id' => $request->penanda_tangan_id,
-            'pihak_verifikasi_id' => $request->pihak_verifikasi_id,
-        ]);
+        $validated['lampiranpendukung'] = $fileName;
+        $validated['nomor_surat'] = $nota->no_berita_acara;
+        $beritaAcara = BeritaAcaraNotaKapal::create($validated);
 
         Hasil::query()
             ->where('no_keluhan', $nota->no_keluhan)
@@ -96,17 +86,35 @@ class BeritaAcaraNotaKapalController extends Controller
 
     public function approval(Request $request, $id)
     {
+        $beritaAcara = BeritaAcaraNotaKapal::findOrFail($id);
+
         $data = [];
-        $keyStatus = $request->role == Role::SIGNER->value ? 'penanda_tangan_status' : 'pihak_verifikasi_status';
-        $keyTime = $request->role == Role::SIGNER->value ? 'penanda_tangan_time' : 'pihak_verifikasi_time';
+        $key = $request->role == Role::SIGNER->value ? 'penanda_tangan' : 'pihak_verifikasi';
 
-        $data[$keyStatus] = $request->status;
-        $data[$keyTime] = now();
+        if ($key === 'penanda_tangan' && !$beritaAcara->pihak_verifikasi_status) {
+            return response()->json([
+                'message' => 'Pihak verifikasi belum melakukan persetujuan.'
+            ], 400);
+        }
 
-        BeritaAcaraNotaKapal::findOrFail($id)->update($data);
+        // auto cancel penanda tangan dan cs
+        if ($key === 'pihak_verifikasi' && $request->status == Status::REJECTED->value) {
+            $data['penanda_tangan_status'] = $request->status;
+            $data['penanda_tangan_time'] = now();
+
+            $beritaAcara->nota->update(['status' => Status::REJECTED]);
+            $beritaAcara->hasil->update(['status' => Status::REJECTED]);
+        }
+
+        $data[$key . '_status'] = $request->status;
+        $data[$key . '_time'] = now();
+        $data[$key . '_keterangan'] = $request->keterangan;
+        $beritaAcara->update($data);
+
+        $statusLabel = $request->status == Status::APPROVED->value ? 'menyetujui' : 'menolak';
 
         return response()->json([
-            'message' => 'Sukses'
+            'message' => "Berhasil $statusLabel berita acara."
         ]);
     }
 
@@ -138,6 +146,7 @@ class BeritaAcaraNotaKapalController extends Controller
             'lampiranpendukung' => ['nullable', 'mimes:pdf', 'max:2048'],
             'penanda_tangan_id' => 'required',
             'pihak_verifikasi_id' => 'required',
+            'pic' => 'required',
         ]);
 
         if ($request->lampiranpendukung) {

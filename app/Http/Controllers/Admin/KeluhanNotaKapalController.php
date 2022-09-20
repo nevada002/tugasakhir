@@ -21,7 +21,7 @@ class KeluhanNotaKapalController extends Controller
     {
         $nota = NotaKapal::findOrFail($id);
         $hasil = Hasil::where('no_keluhan', $nota->no_keluhan)->first();
-
+        
         if (!$nota || !$hasil) {
             return response()->json([
                 'message' => 'Request tidak valid'
@@ -29,12 +29,12 @@ class KeluhanNotaKapalController extends Controller
         }
 
         if (
-            !$nota->berita_acara ||
-            !$nota->berita_acara->penanda_tangan_time ||
+            !$nota->berita_acara || 
+            !$nota->berita_acara->penanda_tangan_time || 
             !$nota->berita_acara->pihak_verifikasi_time
         ) {
             return response()->json([
-                'message' => 'Penanda tangan atau pihak verifikasi belum malakukan approval!'
+                'message' => 'Penanda tangan atau pihak verifikasi belum malakukan persetujuan!'
             ], 400);
         }
 
@@ -43,11 +43,12 @@ class KeluhanNotaKapalController extends Controller
         ]);
 
         $hasil->update([
-            'status' => $request->status
+            'status' => $request->status,
+            'keterangan' => $request->keterangan,
         ]);
 
         return response()->json([
-            'message' => 'Sukses'
+            'message' => 'Sukses' 
         ]);
     }
 }

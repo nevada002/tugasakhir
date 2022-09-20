@@ -22,17 +22,22 @@ class BeritaAcaraNotaKapal extends Model
         'dibuatoleh',
         'keterangan',
         'lampiranpendukung',
+        'pic',
         'penanda_tangan_id',
         'penanda_tangan_status',
         'penanda_tangan_time',
+        'penanda_tangan_keterangan',
         'pihak_verifikasi_id',
         'pihak_verifikasi_status',
         'pihak_verifikasi_time',
+        'pihak_verifikasi_keterangan',
     ];
 
     public $casts = [
         'tanggal' => 'date',
         'tanggal_surat' => 'date',
+        'penanda_tangan_time' => 'datetime',
+        'pihak_verifikasi_time' => 'datetime',
     ];
 
     public function nota()

@@ -60,8 +60,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'alamat' => ['required_if:role,' . Role::AGEN->value, 'string'],
             'jabatan' => [
-                'required_if:role,' . Role::SIGNER->value,
-                'required_if:role,' . Role::VERIFICATOR->value,
+                'required_if:role,' . Role::SIGNER->value, 
+                'required_if:role,' . Role::VERIFICATOR->value, 
                 'in:' . implode(',', Jabatan::values())
             ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],

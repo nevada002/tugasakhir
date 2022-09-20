@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('hasils', function (Blueprint $table) {
             $table->id();
+            $table->morphs('nota');
             $table->nullableMorphs('berita_acara');
             $table->string('no_keluhan');
             $table->string('no_berita_acara')->nullable();
             $table->string('jenis_berita_acara');
             $table->tinyInteger('status');
+            $table->text('keterangan')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

@@ -10,7 +10,7 @@ class BeritaAcaraNotaPPKB extends Model
     use HasFactory;
 
     protected $table = 'berita_acara_nota_ppkbs';
-
+    
     protected $fillable = [
         'nota_id',
         'nomor_surat',
@@ -26,18 +26,23 @@ class BeritaAcaraNotaPPKB extends Model
         'dibuatoleh',
         'alasan',
         'lampiranpendukung',
+        'pic',
         'penanda_tangan_id',
         'penanda_tangan_status',
         'penanda_tangan_time',
+        'penanda_tangan_keterangan',
         'pihak_verifikasi_id',
         'pihak_verifikasi_status',
         'pihak_verifikasi_time',
+        'pihak_verifikasi_keterangan',
     ];
 
     public $casts = [
         'tanggal' => 'date',
+        'penanda_tangan_time' => 'datetime',
+        'pihak_verifikasi_time' => 'datetime',
     ];
-
+    
     public function nota()
     {
         return $this->belongsTo(NotaPPKB::class, 'nota_id', 'id');

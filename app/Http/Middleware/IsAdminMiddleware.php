@@ -19,7 +19,7 @@ class IsAdminMiddleware
         if ($request->user()->role <= 1) {
             abort(403);
         }
-
+        
         return $next($request);
     }
 }

@@ -9,18 +9,26 @@ use Illuminate\Database\Eloquent\Model;
 class Hasil extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
+        'nota_type',
+        'nota_id',
         'berita_acara_type',
         'berita_acara_id',
         'no_keluhan',
         'no_berita_acara',
         'jenis_berita_acara',
         'status',
+        'keterangan',
         'user_id',
     ];
 
     public function berita_acara()
+    {
+        return $this->morphTo();
+    }
+
+    public function nota()
     {
         return $this->morphTo();
     }

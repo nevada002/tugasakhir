@@ -16,12 +16,12 @@ class BeritaAcaraNotaSampahKapalController extends Controller
     public function index()
     {
         $beritaAcaras = BeritaAcaraNotaSampah::query();
-        $beritaAcaras->whereHas('nota', function ($q) {
+        $beritaAcaras->whereHas('nota', function($q) {
             $q->where('status', Status::PROCESS);
         });
 
         if (!auth()->user()->isCustomerService()) {
-            $beritaAcaras->where(function ($q) {
+            $beritaAcaras->where(function($q) {
                 $q->where('penanda_tangan_id', auth()->id());
                 $q->orWhere('pihak_verifikasi_id', auth()->id());
             });
@@ -35,7 +35,7 @@ class BeritaAcaraNotaSampahKapalController extends Controller
     {
         $pihakVerifikasi = User::where('role', Role::VERIFICATOR)->get();
         $penandaTangan = User::where('role', Role::SIGNER)->get();
-        $nota = NotaSampah::get();
+        $nota = NotaSampah::whereDoesntHave('berita_acara')->get();
         return view('admin.nota-sampah-kapal.berita-acara.create', compact('nota', 'pihakVerifikasi', 'penandaTangan'));
     }
 
@@ -50,6 +50,7 @@ class BeritaAcaraNotaSampahKapalController extends Controller
             'lampiranpendukung' => ['required', 'mimes:pdf', 'max:2048'],
             'penanda_tangan_id' => 'required',
             'pihak_verifikasi_id' => 'required',
+            'pic' => 'required',
         ]);
 
         $nota = NotaSampah::find($request->nota_id);
@@ -60,11 +61,11 @@ class BeritaAcaraNotaSampahKapalController extends Controller
         $file = $request->file('lampiranpendukung');
         $fileName = $file->getClientOriginalName();
         $request->file('lampiranpendukung')->storeAs('public/filelampiranpendukung', $fileName);
-
+        
         $validated['lampiranpendukung'] = $fileName;
         $validated['nomor_surat'] = $nota->no_berita_acara;
         $beritaAcara = BeritaAcaraNotaSampah::create($validated);
-
+     
         Hasil::query()
             ->where('no_keluhan', $nota->no_keluhan)
             ->first()
@@ -81,17 +82,35 @@ class BeritaAcaraNotaSampahKapalController extends Controller
 
     public function approval(Request $request, $id)
     {
+        $beritaAcara = BeritaAcaraNotaSampah::findOrFail($id);
+
         $data = [];
-        $keyStatus = $request->role == Role::SIGNER->value ? 'penanda_tangan_status' : 'pihak_verifikasi_status';
-        $keyTime = $request->role == Role::SIGNER->value ? 'penanda_tangan_time' : 'pihak_verifikasi_time';
+        $key = $request->role == Role::SIGNER->value ? 'penanda_tangan' : 'pihak_verifikasi';
 
-        $data[$keyStatus] = $request->status;
-        $data[$keyTime] = now();
+        if ($key === 'penanda_tangan' && !$beritaAcara->pihak_verifikasi_status) {
+            return response()->json([
+                'message' => 'Pihak verifikasi belum melakukan persetujuan.'
+            ], 400);
+        }
 
-        BeritaAcaraNotaSampah::findOrFail($id)->update($data);
+        // auto cancel penanda tangan dan cs
+        if ($key === 'pihak_verifikasi' && $request->status == Status::REJECTED->value) {
+            $data['penanda_tangan_status'] = $request->status;
+            $data['penanda_tangan_time'] = now();
+
+            $beritaAcara->nota->update(['status' => Status::REJECTED]);
+            $beritaAcara->hasil->update(['status' => Status::REJECTED]);
+        }
+
+        $data[$key . '_status'] = $request->status;
+        $data[$key . '_time'] = now();
+        $data[$key . '_keterangan'] = $request->keterangan;
+        $beritaAcara->update($data);
+
+        $statusLabel = $request->status == Status::APPROVED->value ? 'menyetujui' : 'menolak';
 
         return response()->json([
-            'message' => 'Sukses'
+            'message' => "Berhasil $statusLabel berita acara."
         ]);
     }
 
@@ -119,6 +138,7 @@ class BeritaAcaraNotaSampahKapalController extends Controller
             'lampiranpendukung' => ['nullable', 'mimes:pdf', 'max:2048'],
             'penanda_tangan_id' => 'required',
             'pihak_verifikasi_id' => 'required',
+            'pic' => 'required',
         ]);
 
         if ($request->lampiranpendukung) {

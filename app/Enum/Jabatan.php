@@ -14,7 +14,8 @@ enum Jabatan: int
 
     public function label(): string
     {
-        return match ($this) {
+        return match($this) 
+        {
             self::SUPERVISOR_PERENCANAAN => 'Supervisor Perencanaan Pemanduan & Penundaan',
             self::SUPERVISOR_USAHA => 'Supervisor Aneka Usaha',
             self::MANAGER_PROPERTI => 'Manager Properti',
@@ -27,6 +28,6 @@ enum Jabatan: int
 
     public static function values(): array
     {
-        return array_map(fn (Jabatan $s) => $s->value, self::cases());
+        return array_map(fn(Jabatan $s) => $s->value, self::cases());
     }
 }

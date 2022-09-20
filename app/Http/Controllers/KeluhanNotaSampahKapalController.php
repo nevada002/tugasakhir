@@ -29,8 +29,8 @@ class KeluhanNotaSampahKapalController extends Controller
 
         $data['lampiranpendukung'] = $fileName;
         $data['status'] = Status::PROCESS;
-        NotaSampah::create($data);
+        $nota = NotaSampah::create($data);
 
-        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Berhasil membuat keluhan. Nomor: ' . $nota->no_keluhan);
     }
 }

@@ -17,7 +17,11 @@ class HasilController extends Controller
      */
     public function index()
     {
-        $hasils = Hasil::orderBy('id', 'asc')->get();
+        $hasils = Hasil::query()
+            ->with('berita_acara.penanda_tangan:id,name', 'berita_acara.pihak_verifikasi:id,name', 'nota')
+            ->orderBy('id', 'asc')
+            ->get();
+
         return view('user.hasil.index', compact('hasils'));
     }
 
@@ -26,9 +30,9 @@ class HasilController extends Controller
         $hasil = Hasil::query()
             ->with('berita_acara.pihak_verifikasi', 'berita_acara.penanda_tangan', 'berita_acara.nota', 'agen')
             ->whereHas('berita_acara')
-            // ->where('status', Status::APPROVED)
+            ->where('status', Status::APPROVED)
             ->findOrFail($id);
-
+            
         $filename = [
             'App\Models\BeritaAcaraNotaKapal' => 'pdf.nota-kapal',
             'App\Models\BeritaAcaraNotaSampah' => 'pdf.nota-sampah-kapal',

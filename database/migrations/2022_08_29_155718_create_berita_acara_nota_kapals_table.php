@@ -25,12 +25,15 @@ return new class extends Migration
             $table->string('dibuatoleh');
             $table->string('keterangan');
             $table->text('lampiranpendukung');
+            $table->string('pic');
             $table->unsignedBigInteger('penanda_tangan_id');
             $table->tinyInteger('penanda_tangan_status')->nullable();
             $table->timestamp('penanda_tangan_time')->nullable();
+            $table->text('penanda_tangan_keterangan')->nullable();
             $table->unsignedBigInteger('pihak_verifikasi_id');
             $table->tinyInteger('pihak_verifikasi_status')->nullable();
             $table->timestamp('pihak_verifikasi_time')->nullable();
+            $table->text('pihak_verifikasi_keterangan')->nullable();
             $table->timestamps();
         });
     }
